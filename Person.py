@@ -2,16 +2,19 @@ class Person:
     name = ""
     cash = 0.0
     experience = 0
+    level = 1
+    dice = "1D4"
+    bounty = 0
 
-    strength = 0
+    strength = 1
     strength_bonus = 0
     strength_add = 0
 
-    agility = 0
+    agility = 1
     agility_bonus = 0
     agility_add = 0
 
-    intellect = 0
+    intellect = 1
     intellect_bonus = 0
     intellect_add = 0
 
@@ -119,3 +122,19 @@ class Person:
     skill_Trade_bonus = 0
     skill_Trade_effect = 0
     skill_Trade_add = 0
+
+    def __init__(self, name: str = "NoName", level: int = 1):
+        self.name = name
+
+        if (level <= 0) or (level == 1):
+            self.level = 1
+            self.experience = 0
+        else:
+            self.level = level
+            self.experience = (level - 1) * 10
+
+    def __str__(self):
+        return "Person name is " + self.name + " Level " + str(self.level) + " (experience " + str(self.experience) + ")"
+
+test_pers = Person(level=2)
+print(test_pers)
