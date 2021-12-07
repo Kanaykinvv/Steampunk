@@ -40,3 +40,82 @@ class Person:
     consciousness_bonus = 0
     consciousness_add = 0
     consciousness_effect = 0
+
+    burden_current = 0
+    burden_bonus = 0
+    burden_add = 0
+    burden_effect = 0
+
+    equipment = {}
+
+    skill_Athletics_bonus = 0
+    skill_Athletics_effect = 0
+    skill_Athletics_add = 0
+
+    skill_NoWeapons_bonus = 0
+    skill_NoWeapons_effect = 0
+    skill_NoWeapons_add = 0
+
+    skill_Endurance_bonus = 0
+    skill_Endurance_effect = 0
+    skill_Endurance_add = 0
+
+    skill_Throwing_bonus = 0
+    skill_Throwing_effect = 0
+    skill_Throwing_add = 0
+
+    skill_HeavyWeapon_bonus = 0
+    skill_HeavyWeapon_effect = 0
+    skill_HeavyWeapon_add = 0
+
+    skill_ColdWeapon_bonus = 0
+    skill_ColdWeapon_effect = 0
+    skill_ColdWeapon_add = 0
+
+    skill_Gambl_bonus = 0
+    skill_Gambl_effect = 0
+    skill_Gambl_add = 0
+
+    skill_Acrobatics_bonus = 0
+    skill_Acrobatics_effect = 0
+    skill_Acrobatics_add = 0
+
+    skill_Theft_bonus = 0
+    skill_Theft_effect = 0
+    skill_Theft_add = 0
+
+    skill_LightWeapon_bonus = 0
+    skill_LightWeapon_effect = 0
+    skill_LightWeapon_add = 0
+
+    skill_Traps_bonus = 0
+    skill_Traps_effect = 0
+    skill_Traps_add = 0
+
+    skill_Observation_bonus = 0
+    skill_Observation_effect = 0
+    skill_Observation_add = 0
+
+    skill_Hack_bonus = 0
+    skill_Hack_effect = 0
+    skill_Hack_add = 0
+
+    skill_HightechWeapons_bonus = 0
+    skill_HightechWeapons_effect = 0
+    skill_HightechWeapons_add = 0
+
+    skill_Medicine_bonus = 0
+    skill_Medicine_effect = 0
+    skill_Medicine_add = 0
+
+    skill_Negotiation_bonus = 0
+    skill_Negotiation_effect = 0
+    skill_Negotiation_add = 0
+
+    skill_Engineering_bonus = 0
+    skill_Engineering_effect = 0
+    skill_Engineering_add = 0
+
+    skill_Trade_bonus = 0
+    skill_Trade_effect = 0
+    skill_Trade_add = 0
