@@ -1,127 +1,125 @@
 class Person:
-    name = ""
-    cash = 0.0
-    experience = 0
-    level = 1
-    dice = "1D4"
-    bounty = 0
 
-    strength = 1
-    strength_bonus = 0
-    strength_add = 0
+    name = ""                           # Имя персонажа
+    cash = 0.0                          # Количество денежных средств
+    experience = 0                      # Количество текущего опыта
+    level = 1                           # Текущий уровень
+    dice = "1D4"                        # Текущий кубик
+    bounty = 0                          # Текущие очки развития
 
-    agility = 1
-    agility_bonus = 0
-    agility_add = 0
+    strength_bonus = 0                  # Сила (бонус)
+    strength_add = 0                    # Сила (улучшение)
 
-    intellect = 1
-    intellect_bonus = 0
-    intellect_add = 0
+    agility_bonus = 0                   # Ловкость (бонус)
+    agility_add = 0                     # Ловкость (улучшение)
 
-    initiative = 0
-    initiative_bonus = 0
-    initiative_add = 0
+    intellect_bonus = 0                 # Интеллект (бонус)
+    intellect_add = 0                   # Интеллект (улучшение)
 
-    health_current = 0
-    health_bonus = 0
-    health_add = 0
-    health_effect = 0
+    initiative_bonus = 0                # Инициатива (бонус)
+    initiative_add = 0                  # Инициатива (улучшение)
+    initiative_effect = 0               # Инициатива (эффект)
 
-    energy_current = 0
-    energy_bonus = 0
-    energy_add = 0
-    energy_effect = 0
+    health_current = 0                  # Здоровье (текущее)
+    health_bonus = 0                    # Здоровье (бонус)
+    health_add = 0                      # Здоровье (улучшение)
+    health_effect = 0                   # Здоровье (эффект)
 
-    persistence_bonus = 0
-    persistence_add = 0
-    persistence_effect = 0
+    energy_current = 0                  # Энергия (текущая)
+    energy_bonus = 0                    # Энергия (бонус)
+    energy_add = 0                      # Энергия (улучшение)
+    energy_effect = 0                   # Энергия (эффект)
 
-    reaction_bonus = 0
-    reaction_add = 0
-    reaction_effect = 0
+    persistence_bonus = 0               # Стойкость (бонус)
+    persistence_add = 0                 # Стойкость (улучшение)
+    persistence_effect = 0              # Стойкость (эффект)
 
-    consciousness_bonus = 0
-    consciousness_add = 0
-    consciousness_effect = 0
+    reaction_bonus = 0                  # Реакция (бонус)
+    reaction_add = 0                    # Реакция (улучшение)
+    reaction_effect = 0                 # Реакция (эффект)
 
-    burden_current = 0
-    burden_bonus = 0
-    burden_add = 0
-    burden_effect = 0
+    consciousness_bonus = 0             # Сознание (бонус)
+    consciousness_add = 0               # Сознание (улучшение)
+    consciousness_effect = 0            # Сознание (эффект)
 
-    equipment = {}
+    burden_current = 0                  # Ноша (текущая)
+    burden_bonus = 0                    # Ноша (бонус)
+    burden_add = 0                      # Ноша (улучшение)
+    burden_effect = 0                   # Ноша (эффект)
 
-    skill_Athletics_bonus = 0
-    skill_Athletics_effect = 0
-    skill_Athletics_add = 0
+    equipment = {}                      # Экипировка
 
-    skill_NoWeapons_bonus = 0
-    skill_NoWeapons_effect = 0
-    skill_NoWeapons_add = 0
+    skill_Athletics_bonus = 0           # Навык - Атлетика (бонус)
+    skill_Athletics_effect = 0          # Навык - Атлетика (эффект)
+    skill_Athletics_add = 0             # Навык - Атлетика (улучшение)
 
-    skill_Endurance_bonus = 0
-    skill_Endurance_effect = 0
-    skill_Endurance_add = 0
+    skill_NoWeapons_bonus = 0           # Навык - Без оружия (бонус)
+    skill_NoWeapons_effect = 0          # Навык - Без оружия (эффект)
+    skill_NoWeapons_add = 0             # Навык - Без оружия (улучшение)
 
-    skill_Throwing_bonus = 0
-    skill_Throwing_effect = 0
-    skill_Throwing_add = 0
+    skill_Endurance_bonus = 0           # Навык - Выносливость (бонус)
+    skill_Endurance_effect = 0          # Навык - Выносливость (эффект)
+    skill_Endurance_add = 0             # Навык - Выносливость (улучшение)
 
-    skill_HeavyWeapon_bonus = 0
-    skill_HeavyWeapon_effect = 0
-    skill_HeavyWeapon_add = 0
+    skill_Throwing_bonus = 0            # Навык - Метание (бонус)
+    skill_Throwing_effect = 0           # Навык - Метание (эффект)
+    skill_Throwing_add = 0              # Навык - Метание (улучшение)
 
-    skill_ColdWeapon_bonus = 0
-    skill_ColdWeapon_effect = 0
-    skill_ColdWeapon_add = 0
+    skill_HeavyWeapon_bonus = 0         # Навык - Тяжёлое оружие (бонус)
+    skill_HeavyWeapon_effect = 0        # Навык - Тяжёлое оружие (эффект)
+    skill_HeavyWeapon_add = 0           # Навык - Тяжёлое оружие (улучшение)
 
-    skill_Gambl_bonus = 0
-    skill_Gambl_effect = 0
-    skill_Gambl_add = 0
+    skill_ColdWeapon_bonus = 0          # Навык - Холодное оружие (бонус)
+    skill_ColdWeapon_effect = 0         # Навык - Холодное оружие (эффект)
+    skill_ColdWeapon_add = 0            # Навык - Холодное оружие (улучшение)
 
-    skill_Acrobatics_bonus = 0
-    skill_Acrobatics_effect = 0
-    skill_Acrobatics_add = 0
+    skill_Gambl_bonus = 0               # Навык - Азартные игры (бонус)
+    skill_Gambl_effect = 0              # Навык - Азартные игры (эффект)
+    skill_Gambl_add = 0                 # Навык - Азартные игры (улучшение)
 
-    skill_Theft_bonus = 0
-    skill_Theft_effect = 0
-    skill_Theft_add = 0
+    skill_Acrobatics_bonus = 0          # Навык - Акробатика (бонус)
+    skill_Acrobatics_effect = 0         # Навык - Акробатика (эффект)
+    skill_Acrobatics_add = 0            # Навык - Акробатика (улучшение)
 
-    skill_LightWeapon_bonus = 0
-    skill_LightWeapon_effect = 0
-    skill_LightWeapon_add = 0
+    skill_Theft_bonus = 0               # Навык - Воровство (бонус)
+    skill_Theft_effect = 0              # Навык - Воровство (эффект)
+    skill_Theft_add = 0                 # Навык - Воровство (улучшение)
 
-    skill_Traps_bonus = 0
-    skill_Traps_effect = 0
-    skill_Traps_add = 0
+    skill_LightWeapon_bonus = 0         # Навык - Лёгкое оружие (бонус)
+    skill_LightWeapon_effect = 0        # Навык - Лёгкое оружие (эффект)
+    skill_LightWeapon_add = 0           # Навык - Лёгкое оружие (улучшение)
 
-    skill_Observation_bonus = 0
-    skill_Observation_effect = 0
-    skill_Observation_add = 0
+    skill_Traps_bonus = 0               # Навык - Ловушки (бонус)
+    skill_Traps_effect = 0              # Навык - Ловушки (эффект)
+    skill_Traps_add = 0                 # Навык - Ловушки (улучшение)
 
-    skill_Hack_bonus = 0
-    skill_Hack_effect = 0
-    skill_Hack_add = 0
+    skill_Observation_bonus = 0         # Навык - Наблюдательность (бонус)
+    skill_Observation_effect = 0        # Навык - Наблюдательность (эффект)
+    skill_Observation_add = 0           # Навык - Наблюдательность (улучшение)
 
-    skill_HightechWeapons_bonus = 0
-    skill_HightechWeapons_effect = 0
-    skill_HightechWeapons_add = 0
+    skill_Hack_bonus = 0                # Навык - Взлом (бонус)
+    skill_Hack_effect = 0               # Навык - Взлом (эффект)
+    skill_Hack_add = 0                  # Навык - Взлом (улучшение)
 
-    skill_Medicine_bonus = 0
-    skill_Medicine_effect = 0
-    skill_Medicine_add = 0
+    skill_HightechWeapons_bonus = 0     # Навык - Высокотехнологичное оружие (бонус)
+    skill_HightechWeapons_effect = 0    # Навык - Высокотехнологичное оружие (эффект)
+    skill_HightechWeapons_add = 0       # Навык - Высокотехнологичное оружие (улучшение)
 
-    skill_Negotiation_bonus = 0
-    skill_Negotiation_effect = 0
-    skill_Negotiation_add = 0
+    skill_Engineering_bonus = 0         # Навык - Инженерия (бонус)
+    skill_Engineering_effect = 0        # Навык - Инженерия (эффект)
+    skill_Engineering_add = 0           # Навык - Инженерия (улучшение)
 
-    skill_Engineering_bonus = 0
-    skill_Engineering_effect = 0
-    skill_Engineering_add = 0
+    skill_Medicine_bonus = 0            # Навык - Медицина (бонус)
+    skill_Medicine_effect = 0           # Навык - Медицина (эффект)
+    skill_Medicine_add = 0              # Навык - Медицина (улучшение)
 
-    skill_Trade_bonus = 0
-    skill_Trade_effect = 0
-    skill_Trade_add = 0
+    skill_Negotiation_bonus = 0         # Навык - Переговоры (бонус)
+    skill_Negotiation_effect = 0        # Навык - Переговоры (эффект)
+    skill_Negotiation_add = 0           # Навык - Переговоры (улучшение)
+
+    skill_Trade_bonus = 0               # Навык - Торговля (бонус)
+    skill_Trade_effect = 0              # Навык - Торговля (эффект)
+    skill_Trade_add = 0                 # Навык - Торговля (улучшение)
 
     def __init__(self, name: str = "NoName", level: int = 1):
         self.name = name
