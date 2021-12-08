@@ -1,3 +1,5 @@
+from game_config import *
+
 class Person:
 
     name = ""                           # Имя персонажа
@@ -127,12 +129,36 @@ class Person:
         if (level <= 0) or (level == 1):
             self.level = 1
             self.experience = 0
+            self.bounty = ADD_BOUNTY_FOR_FIRS_LEVEL
         else:
             self.level = level
             self.experience = (level - 1) * 10
+            self.bounty = ADD_BOUNTY_FOR_FIRS_LEVEL + (self.level - 1) * ADD_BOUNTY_FOR_LEVEL
 
     def __str__(self):
         return "Person name is " + self.name + " Level " + str(self.level) + " (experience " + str(self.experience) + ")"
 
-test_pers = Person(level=2)
+    def cash_get(self):
+        return self.cash
+
+    def cash_set(self, value: float):
+        self.cash = value
+
+    def cash_change(self, value: float):
+        self.cash += value
+
+    def experience_get(self):
+        return self.experience
+
+    def experience_add(self, value: int):
+        self.experience += value
+
+        if self.level < (1+self.experience // 10):
+            self.level += 1
+            self.bounty += ADD_BOUNTY_FOR_LEVEL
+
+
+
+test_pers = Person()
 print(test_pers)
+print(test_pers.bounty)
