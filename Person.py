@@ -156,12 +156,18 @@ class Person:
         self.experience += value
 
         if self.level < (1 + (self.experience // EXP_FOR_NEXT_LEVEL)):
-            self.level += 1
-            self.bounty += ADD_BOUNTY_FOR_LEVEL
+            tmp_lvl = (1 + (self.experience // EXP_FOR_NEXT_LEVEL)) - self.level
+            self.level += tmp_lvl
+            self.bounty += (ADD_BOUNTY_FOR_LEVEL * tmp_lvl)
             self.dice = DICE_FOR_LEVEL[self.level]
 
 
 test_pers = Person(level=1)
+print(test_pers)
+print(test_pers.bounty)
+print("Dice = " + test_pers.dice)
+print("="*25)
+test_pers.experience_add(100)
 print(test_pers)
 print(test_pers.bounty)
 print("Dice = " + test_pers.dice)
