@@ -132,8 +132,10 @@ class Person:
             self.bounty = ADD_BOUNTY_FOR_FIRS_LEVEL
         else:
             self.level = level
-            self.experience = (level - 1) * 10
+            self.experience = (level - 1) * EXP_FOR_NEXT_LEVEL
             self.bounty = ADD_BOUNTY_FOR_FIRS_LEVEL + (self.level - 1) * ADD_BOUNTY_FOR_LEVEL
+
+        self.dice = DICE_FOR_LEVEL[self.level]
 
     def __str__(self):
         return "Person name is " + self.name + " Level " + str(self.level) + " (experience " + str(self.experience) + ")"
@@ -153,12 +155,13 @@ class Person:
     def experience_add(self, value: int):
         self.experience += value
 
-        if self.level < (1+self.experience // 10):
+        if self.level < (1 + (self.experience // EXP_FOR_NEXT_LEVEL)):
             self.level += 1
             self.bounty += ADD_BOUNTY_FOR_LEVEL
+            self.dice = DICE_FOR_LEVEL[self.level]
 
 
-
-test_pers = Person()
+test_pers = Person(level=1)
 print(test_pers)
 print(test_pers.bounty)
+print("Dice = " + test_pers.dice)
