@@ -161,6 +161,9 @@ class Person:
             self.bounty += (ADD_BOUNTY_FOR_LEVEL * tmp_lvl)
             self.dice = DICE_FOR_LEVEL[self.level]
 
+    def strength_get(self):
+        return self.strength_bonus + self.strength_add
+
 
 test_pers = Person(level=1)
 print(test_pers)
