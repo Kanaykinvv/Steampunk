@@ -164,6 +164,12 @@ class Person:
     def strength_get(self):
         return self.strength_bonus + self.strength_add
 
+    def agility_get(self):
+        return self.agility_bonus + self.agility_add
+
+    def intellect_get(self):
+        return self.intellect_bonus + self.intellect_add
+
 
 test_pers = Person(level=1)
 print(test_pers)
