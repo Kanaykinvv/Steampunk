@@ -170,6 +170,50 @@ class Person:
     def intellect_get(self):
         return self.intellect_bonus + self.intellect_add
 
+    def initiative_get(self):
+        return (self.initiative_bonus * FACTOR_INITIATIVE_BONUS) + \
+               (self.initiative_add * FACTOR_INITIATIVE_ADD) + \
+               + self.initiative_effect
+
+    def health_get_all(self):
+        return (self.health_bonus * FACTOR_HEALTH_BONUS) + \
+               (self.health_add * FACTOR_HEALTH_ADD) + \
+                self.health_effect
+
+    def health_get_current(self):
+        return self.health_current
+
+    def energy_get_all(self):
+        return (self.energy_bonus * FACTOR_ENERGY_BONUS) + \
+               (self.energy_add * FACTOR_ENERGY_ADD) + \
+                self.energy_effect
+
+    def energy_get_current(self):
+        return self.energy_current
+
+    def persistence_get(self):
+        return (self.persistence_bonus * FACTOR_ALL_RESISTENCES_BONUS) + \
+               (self.persistence_add * FACTOR_ALL_RESISTENCES_ADD) + \
+                self.persistence_effect
+
+    def reaction_get(self):
+        return (self.reaction_bonus * FACTOR_ALL_RESISTENCES_BONUS) + \
+               (self.reaction_add * FACTOR_ALL_RESISTENCES_ADD) + \
+                self.reaction_effect
+
+    def consciousness__get(self):
+        return (self.consciousness_bonus * FACTOR_ALL_RESISTENCES_BONUS) + \
+               (self.consciousness_add * FACTOR_ALL_RESISTENCES_ADD) + \
+                self.consciousness_effect
+
+    def burden_get_all(self):
+        return (self.burden_bonus * FACTOR_BURDEN_BONUS) + \
+               (self.burden_add * FACTOR_BURDEN_ADD) + \
+                self.burden_effect
+
+    def burden_get_current(self):
+        return self.burden_current
+
 
 test_pers = Person(level=1)
 print(test_pers)
