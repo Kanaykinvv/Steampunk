@@ -214,6 +214,113 @@ class Person:
     def burden_get_current(self):
         return self.burden_current
 
+    # Навык - Атлетика
+    def skill_Athletics_get(self):
+        return (self.skill_Athletics_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_Athletics_add * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_Athletics_effect
+
+    # Навык - Без оружия
+    def skill_NoWeapons_get(self):
+        return (self.skill_NoWeapons_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_NoWeapons_add * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_NoWeapons_effect
+
+    # Навык - Выносливость
+    def skill_Endurance_get(self):
+        return (self.skill_Endurance_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_Endurance_add * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_Endurance_effect
+
+    # Навык - Метание
+    def skill_Throwing_get(self):
+        return (self.skill_Throwing_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_Throwing_add * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_Throwing_effect
+
+    # Навык - Тяжёлое оружие
+    def skill_HeavyWeapon_get(self):
+        return (self.skill_HeavyWeapon_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_HeavyWeapon_add * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_HeavyWeapon_effect
+
+    # Навык - Холодное оружие
+    def skill_ColdWeapon_get(self):
+        return (self.skill_ColdWeapon_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_ColdWeapon_add * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_ColdWeapon_effect
+
+    # Навык - Азартные игры
+    def skill_Gambl_get(self):
+        return (self.skill_Gambl_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_Gambl_add * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_Gambl_effect
+
+    # Навык - Акробатика
+    def skill_Acrobatics_get(self):
+        return (self.skill_Acrobatics_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_Acrobatics_add * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_Acrobatics_effect
+
+    # Навык - Воровство
+    def skill_Theft_get(self):
+        return (self.skill_Theft_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_Theft_effect * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_Theft_effect
+
+    # Навык - Лёгкое оружие
+    def skill_LightWeapon_get(self):
+        return (self.skill_LightWeapon_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_LightWeapon_add * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_LightWeapon_effect
+
+    # Навык - Ловушки
+    def skill_Traps_get(self):
+        return (self.skill_Traps_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_Traps_add * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_Traps_effect
+
+    # Навык - Наблюдательность
+    def skill_Observation_get(self):
+        return (self.skill_Observation_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_Observation_add * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_Observation_effect
+
+    # Навык - Взлом
+    def skill_Hack_get(self):
+        return (self.skill_Hack_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_Hack_effect * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_Hack_add
+
+    # Навык - Высокотехнологичное оружие
+    def skill_HightechWeapons_get(self):
+        return (self.skill_HightechWeapons_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_HightechWeapons_effect * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_HightechWeapons_add
+
+    # Навык - Инженерия
+    def skill_Engineering_get(self):
+        return (self.skill_Engineering_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_Engineering_add * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_Engineering_effect
+
+    # Навык - Медицина
+    def skill_Medicine_get(self):
+        return (self.skill_Medicine_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_Medicine_add * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_Medicine_effect
+
+    # Навык - Переговоры
+    def skill_Negotiation_get(self):
+        return (self.skill_Negotiation_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_Negotiation_add * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_Negotiation_effect
+
+    # Навык - Торговля
+    def skill_Trade_get(self):
+        return (self.skill_Trade_bonus * FACTOR_ALL_SKILLS_BONUS) + \
+               (self.skill_Trade_add * FACTOR_ALL_SKILLS_ADD) + \
+               self.skill_Trade_effect
 
 test_pers = Person(level=1)
 print(test_pers)

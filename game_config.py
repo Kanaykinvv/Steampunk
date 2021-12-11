@@ -123,4 +123,4 @@ FACTOR_BURDEN_BONUS = 42            # Ноша (бонус)
 FACTOR_BURDEN_ADD = 25              # Ноша (улучшение)
 
 FACTOR_ALL_SKILLS_BONUS = 3         # Все навыки (бонус)
-FACTOR_ALL_SKILLS__ADD = 2          # Все навыки (улучшение)
+FACTOR_ALL_SKILLS_ADD = 2          # Все навыки (улучшение)
