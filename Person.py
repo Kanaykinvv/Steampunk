@@ -214,113 +214,237 @@ class Person:
     def burden_get_current(self):
         return self.burden_current
 
-    # Навык - Атлетика
-    def skill_Athletics_get(self):
+    def skill_get(self, skill_name: str):
+        """
+        Определяет и возвращает общий бонус по указанному Навыку
+        :return: Общий бонус по указанному Навыку, или None, если Навык отсутствует
+        """
+        if self.skills.get(skill_name):
+            bonus = self.skills[skill_name]["bonus"]
+            add = self.skills[skill_name]["add"]
+            effect = 0
+
+            if len(self.skills[skill_name]["effect"]):
+                for key, value in self.skills[skill_name]["effect"].items():
+                    effect += value
+
+            return (bonus * FACTOR_ALL_RESISTENCES_BONUS) + \
+                   (add * FACTOR_ALL_RESISTENCES_ADD) + \
+                    effect
+
+        else: return None
+
+    def skill_athletics_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Атлетика
+        :return: Общий бонус по Навыку - Атлетика
+        """
         return (self.skill_Athletics_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_Athletics_add * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_Athletics_effect
+                self.skill_Athletics_effect
 
-    # Навык - Без оружия
-    def skill_NoWeapons_get(self):
+    def skill_athletics_up(self, up_to: int = 1):
+        """
+        Повышение Навыка - Атлетика
+        :param up_to: Значение повышения (по умолчанию 1)
+        """
+        if self.bounty >= up_to:
+            if self.level == 1:
+                self.skill_Athletics_bonus += up_to
+            else:
+                self.skill_Athletics_add += up_to
+            self.bounty -= up_to
+
+    def skill_noweapons_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Без оружия
+        :return: Общий бонус по Навыку - Без оружия
+        """
         return (self.skill_NoWeapons_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_NoWeapons_add * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_NoWeapons_effect
+                self.skill_NoWeapons_effect
 
-    # Навык - Выносливость
-    def skill_Endurance_get(self):
+    def skill_noweapons_up(self, up_to: int = 1):
+        """
+        Повышение Навыка - Без оружия
+        :param up_to: Значение повышения (по умолчанию 1)
+        """
+        if self.bounty >= up_to:
+            if self.level == 1:
+                self.skill_NoWeapons_bonus += up_to
+            else:
+                self.skill_NoWeapons_add += up_to
+            self.bounty -= up_to
+
+    def skill_endurance_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Выносливость
+        :return: Общий бонус по Навыку - Выносливость
+        """
         return (self.skill_Endurance_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_Endurance_add * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_Endurance_effect
+                self.skill_Endurance_effect
 
-    # Навык - Метание
-    def skill_Throwing_get(self):
+    def skill_endurance_up(self, up_to: int = 1):
+        """
+        Повышение Навыка - Выносливость
+        :param up_to: Значение повышения (по умолчанию 1)
+        """
+        if self.bounty >= up_to:
+            if self.level == 1:
+                self.skill_Endurance_bonus += up_to
+            else:
+                self.skill_Endurance_add += up_to
+            self.bounty -= up_to
+
+    def skill_throwing_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Метание
+        :return: Общий бонус по Навыку - Метание
+        """
         return (self.skill_Throwing_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_Throwing_add * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_Throwing_effect
+                self.skill_Throwing_effect
 
-    # Навык - Тяжёлое оружие
-    def skill_HeavyWeapon_get(self):
+    def skill_throwing_up(self, up_to: int = 1):
+        """
+        Повышение Навыка - Метание
+        :param up_to: Значение повышения (по умолчанию 1)
+        """
+        if self.bounty >= up_to:
+            if self.level == 1:
+                self.skill_Throwing_bonus += up_to
+            else:
+                self.skill_Throwing_add += up_to
+            self.bounty -= up_to
+
+    def skill_heavyweapon_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Тяжёлое оружие
+        :return: Общий бонус по Навыку - Тяжёлое оружие
+        """
         return (self.skill_HeavyWeapon_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_HeavyWeapon_add * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_HeavyWeapon_effect
+                self.skill_HeavyWeapon_effect
 
-    # Навык - Холодное оружие
-    def skill_ColdWeapon_get(self):
+    def skill_coldweapon_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Холодное оружие
+        :return: Общий бонус по Навыку - Холодное оружие
+        """
         return (self.skill_ColdWeapon_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_ColdWeapon_add * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_ColdWeapon_effect
+                self.skill_ColdWeapon_effect
 
-    # Навык - Азартные игры
-    def skill_Gambl_get(self):
+    def skill_gambl_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Азартные игры
+        :return: Общий бонус по Навыку - Азартные игры
+        """
         return (self.skill_Gambl_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_Gambl_add * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_Gambl_effect
+                self.skill_Gambl_effect
 
-    # Навык - Акробатика
-    def skill_Acrobatics_get(self):
+    def skill_acrobatics_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Акробатика
+        :return: Общий бонус по Навыку - Акробатика
+        """
         return (self.skill_Acrobatics_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_Acrobatics_add * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_Acrobatics_effect
+                self.skill_Acrobatics_effect
 
-    # Навык - Воровство
-    def skill_Theft_get(self):
+    def skill_theft_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Воровство
+        :return: Общий бонус по Навыку - Воровство
+        """
         return (self.skill_Theft_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_Theft_effect * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_Theft_effect
+                self.skill_Theft_effect
 
-    # Навык - Лёгкое оружие
-    def skill_LightWeapon_get(self):
+    def skill_lightweapon_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Лёгкое оружие
+        :return: Общий бонус по Навыку - Лёгкое оружие
+        """
         return (self.skill_LightWeapon_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_LightWeapon_add * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_LightWeapon_effect
+                self.skill_LightWeapon_effect
 
-    # Навык - Ловушки
-    def skill_Traps_get(self):
+    def skill_traps_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Ловушки
+        :return: Общий бонус по Навыку - Ловушки
+        """
         return (self.skill_Traps_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_Traps_add * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_Traps_effect
+                self.skill_Traps_effect
 
-    # Навык - Наблюдательность
-    def skill_Observation_get(self):
+    def skill_observation_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Наблюдательность
+        :return: Общий бонус по Навыку - Наблюдательность
+        """
         return (self.skill_Observation_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_Observation_add * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_Observation_effect
+                self.skill_Observation_effect
 
-    # Навык - Взлом
-    def skill_Hack_get(self):
+    def skill_hack_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Взлом
+        :return: Общий бонус по Навыку - Взлом
+        """
         return (self.skill_Hack_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_Hack_effect * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_Hack_add
+                self.skill_Hack_add
 
-    # Навык - Высокотехнологичное оружие
-    def skill_HightechWeapons_get(self):
+    def skill_hightechweapons_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Высокотехнологичное оружие
+        :return: Общий бонус по Навыку - Высокотехнологичное оружие
+        """
         return (self.skill_HightechWeapons_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_HightechWeapons_effect * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_HightechWeapons_add
+                self.skill_HightechWeapons_add
 
-    # Навык - Инженерия
-    def skill_Engineering_get(self):
+    def skill_engineering_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Инженерия
+        :return: Общий бонус по Навыку - Инженерия
+        """
         return (self.skill_Engineering_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_Engineering_add * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_Engineering_effect
+                self.skill_Engineering_effect
 
-    # Навык - Медицина
-    def skill_Medicine_get(self):
+    def skill_medicine_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Медицина
+        :return: Общий бонус по Навыку - Медицина
+        """
         return (self.skill_Medicine_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_Medicine_add * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_Medicine_effect
+                self.skill_Medicine_effect
 
-    # Навык - Переговоры
-    def skill_Negotiation_get(self):
+    def skill_negotiation_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Переговоры
+        :return: Общий бонус по Навыку - Переговоры
+        """
         return (self.skill_Negotiation_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_Negotiation_add * FACTOR_ALL_SKILLS_ADD) + \
-               self.skill_Negotiation_effect
+                self.skill_Negotiation_effect
 
-    # Навык - Торговля
-    def skill_Trade_get(self):
+    def skill_trade_get(self):
+        """
+        Определяет и возвращает общий бонус по Навыку - Торговля
+        :return: Общий бонус по Навыку - Торговля
+        """
         return (self.skill_Trade_bonus * FACTOR_ALL_SKILLS_BONUS) + \
                (self.skill_Trade_add * FACTOR_ALL_SKILLS_ADD) + \
                self.skill_Trade_effect
+
+
 
 test_pers = Person(level=1)
 print(test_pers)
