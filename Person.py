@@ -220,11 +220,35 @@ class Person:
     def strength_get(self):
         return 1 + self.strength_bonus + self.strength_add
 
+    def strength_up(self, value: int = 1):
+        if self.bounty >= value:
+            if self.level == 1:
+                self.strength_bonus += value
+            else:
+                self.strength_add += value
+            self.bounty -= value
+
     def agility_get(self):
         return 1 + self.agility_bonus + self.agility_add
 
+    def agility_up(self, value: int = 1):
+        if self.bounty >= value:
+            if self.level == 1:
+                self.agility_bonus += value
+            else:
+                self.agility_add += value
+            self.bounty -= value
+
     def intellect_get(self):
         return 1 + self.intellect_bonus + self.intellect_add
+
+    def intellect_up(self, value: int = 1):
+        if self.bounty >= value:
+            if self.level == 1:
+                self.intellect_bonus += value
+            else:
+                self.intellect_add += value
+            self.bounty -= value
 
     def initiative_get(self):
         return (self.initiative_bonus * FACTOR_INITIATIVE_BONUS) + \
@@ -257,7 +281,7 @@ class Person:
                (self.reaction_add * FACTOR_ALL_RESISTENCES_ADD) + \
                 self.reaction_effect
 
-    def consciousness__get(self):
+    def consciousness_get(self):
         return (self.consciousness_bonus * FACTOR_ALL_RESISTENCES_BONUS) + \
                (self.consciousness_add * FACTOR_ALL_RESISTENCES_ADD) + \
                 self.consciousness_effect
@@ -315,5 +339,9 @@ print(test_pers.bounty)
 print("Dice = " + test_pers.dice)
 print("="*25)
 print("skill_get(Medicine) = " + str(test_pers.skill_get("Medicine")))
-
-# Написать метод повышения Характеристик, поднять через него Интеллект и проверить новый вывод skill_get(Medicine)
+test_pers.intellect_up(5)
+print("skill_get(Medicine) = " + str(test_pers.skill_get("Medicine")))
+print("="*25)
+print("skill_get(HeavyWeapon) = " + str(test_pers.skill_get("HeavyWeapon")))
+test_pers.strength_up(1)
+print("skill_get(HeavyWeapon) = " + str(test_pers.skill_get("HeavyWeapon")))
