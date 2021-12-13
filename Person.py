@@ -250,6 +250,25 @@ class Person:
                 self.intellect_add += value
             self.bounty -= value
 
+    def characteristic_up(self, characteristic: str, value: int = 1):
+        if self.bounty >= value:
+            if characteristic == "strength":
+                if self.level == 1:
+                    self.intellect_bonus += value
+                else:
+                    self.intellect_add += value
+            elif characteristic == "agility":
+                if self.level == 1:
+                    self.agility_bonus += value
+                else:
+                    self.agility_add += value
+            elif characteristic == "intellect":
+                if self.level == 1:
+                    self.intellect_bonus += value
+                else:
+                    self.intellect_add += value
+            self.bounty -= value
+
     def initiative_get(self):
         return (self.initiative_bonus * FACTOR_INITIATIVE_BONUS) + \
                (self.initiative_add * FACTOR_INITIATIVE_ADD) + \
@@ -287,12 +306,39 @@ class Person:
                 self.consciousness_effect
 
     def burden_get_all(self):
-        return (self.burden_bonus * FACTOR_BURDEN_BONUS) + \
+        """
+        Возвращает максимально возможный вес ноши, если это значение меньше 0 (ввиду эффекта), то
+        максимальный вес будет равен 0.
+        :return: Возвращает максимально возможный вес ноши.
+        """
+        result = 24 + (self.strength_get() * FACTOR_BURDEN_INDEX) + \
+               (self.burden_bonus * FACTOR_BURDEN_BONUS) + \
                (self.burden_add * FACTOR_BURDEN_ADD) + \
                 self.burden_effect
 
+        if result < 0: result = 0
+
+        return result
+
     def burden_get_current(self):
+        """
+        Возвращает текущий вес ноши
+        :return: Текущий вес ноши
+        """
+        # Необходимо тут проводить считывание всего перечня переносимых вещей
         return self.burden_current
+
+    def burden_up(self, value: int = 1):
+        """
+        Увеличение параметра максимальной ноши
+        :return:
+        """
+        if self.bounty >= value:
+            if self.level == 1:
+                self.burden_bonus += value
+            else:
+                self.burden_add += value
+            self.bounty -= value
 
     def skill_get(self, skill_name: str):
         """
@@ -325,6 +371,19 @@ class Person:
 
         else: return None
 
+    def skill_up(self, skill_name: str, value: int = 1):
+        """
+        Повышение выбранного Навыка на указанное значение
+        :param skill_name: Наименование Навыка
+        :param value: Значение, на которое необходимо увеличить Навык
+        :return:
+        """
+        if (self.bounty >= value) and (self.skills.get(skill_name)):
+            if self.level == 1:
+                self.skills[skill_name]["bonus"] += value
+            else:
+                self.skills[skill_name]["add"] += value
+            self.bounty -= value
 
 
 
@@ -345,3 +404,5 @@ print("="*25)
 print("skill_get(HeavyWeapon) = " + str(test_pers.skill_get("HeavyWeapon")))
 test_pers.strength_up(1)
 print("skill_get(HeavyWeapon) = " + str(test_pers.skill_get("HeavyWeapon")))
+print("="*25)
+print("burden_get_all = " + str(test_pers.burden_get_all()))
