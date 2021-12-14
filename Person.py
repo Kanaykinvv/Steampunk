@@ -218,9 +218,19 @@ class Person:
             self.dice = DICE_FOR_LEVEL[self.level]
 
     def strength_get(self):
+        """
+        Возвращает общее значение характеристики Сила,
+        с учетом всех вложений
+        :return: Общее значение характеристики Сила
+        """
         return 1 + self.strength_bonus + self.strength_add
 
     def strength_up(self, value: int = 1):
+        """
+        Повышение характеристики Сила
+        :param value: Значение увеличения
+        :return: -
+        """
         if self.bounty >= value:
             if self.level == 1:
                 self.strength_bonus += value
@@ -229,9 +239,19 @@ class Person:
             self.bounty -= value
 
     def agility_get(self):
+        """
+        Возвращает общее значение характеристики Ловкость,
+        с учетом всех вложений
+        :return: Общее значение характеристики Ловкость
+        """
         return 1 + self.agility_bonus + self.agility_add
 
     def agility_up(self, value: int = 1):
+        """
+        Повышение характеристики Ловкость
+        :param value: Значение увеличения
+        :return: -
+        """
         if self.bounty >= value:
             if self.level == 1:
                 self.agility_bonus += value
@@ -240,9 +260,19 @@ class Person:
             self.bounty -= value
 
     def intellect_get(self):
+        """
+        Возвращает общее значение характеристики Интеллект,
+        с учетом всех вложений
+        :return: Общее значение характеристики Интеллект
+        """
         return 1 + self.intellect_bonus + self.intellect_add
 
     def intellect_up(self, value: int = 1):
+        """
+        Повышение характеристики Интеллект
+        :param value: Значение увеличения
+        :return: -
+        """
         if self.bounty >= value:
             if self.level == 1:
                 self.intellect_bonus += value
