@@ -344,7 +344,7 @@ class Person:
                  (self.health_add * FACTOR_HEALTH_ADD) + \
                  self.health_effect
 
-        if result < 0: result = 1
+        if result <= 0: result = 1
 
         return result
 
@@ -366,7 +366,7 @@ class Person:
                  (self.energy_add * FACTOR_ENERGY_ADD) + \
                   self.energy_effect
 
-        if result < 0: result = 1
+        if result < 0: result = 0
 
         return result
 
@@ -391,6 +391,19 @@ class Person:
 
         return result
 
+    def persistence_up(self, value: int = 1):
+        """
+        Увеличение параметра Стойкости
+        :param value: Значение увеличения
+        :return: -
+        """
+        if self.bounty >= value:
+            if self.level == 1:
+                self.persistence_bonus += value
+            else:
+                self.persistence_add += value
+            self.bounty -= value
+
     def reaction_get(self):
         """
         Возвращает значение Реакции
@@ -404,6 +417,19 @@ class Person:
         if result < 0: result = 0
 
         return result
+
+    def reaction_up(self, value: int = 1):
+        """
+        Увеличение параметра Реакции
+        :param value: Значение увеличения
+        :return: -
+        """
+        if self.bounty >= value:
+            if self.level == 1:
+                self.reaction_bonus += value
+            else:
+                self.reaction_add += value
+            self.bounty -= value
 
     def consciousness_get(self):
         """
@@ -419,16 +445,30 @@ class Person:
 
         return result
 
+    def consciousness_up(self, value: int = 1):
+        """
+        Увеличение параметра Сознания
+        :param value: Значение увеличения
+        :return: -
+        """
+        if self.bounty >= value:
+            if self.level == 1:
+                self.consciousness_bonus += value
+            else:
+                self.consciousness_add += value
+            self.bounty -= value
+
     def burden_get_all(self):
         """
         Возвращает максимально возможный вес ноши, если это значение меньше 0 (ввиду эффекта), то
         максимальный вес будет равен 0.
         :return: Возвращает максимально возможный вес ноши.
         """
-        result = 24 + (self.strength_get() * FACTOR_BURDEN_STRENGTH) + \
-               (self.burden_bonus * FACTOR_BURDEN_BONUS) + \
-               (self.burden_add * FACTOR_BURDEN_ADD) + \
-                self.burden_effect
+        result = FACTOR_BURDEN_START + \
+                 (self.strength_get() * FACTOR_BURDEN_STRENGTH) + \
+                 (self.burden_bonus * FACTOR_BURDEN_BONUS) + \
+                 (self.burden_add * FACTOR_BURDEN_ADD) + \
+                  self.burden_effect
 
         if result < 0: result = 0
 
