@@ -223,7 +223,7 @@ class Person:
         с учетом всех вложений
         :return: Общее значение характеристики Сила
         """
-        return 1 + self.strength_bonus + self.strength_add
+        return STRENGTH_START + self.strength_bonus + self.strength_add
 
     def strength_up(self, value: int = 1):
         """
@@ -244,7 +244,7 @@ class Person:
         с учетом всех вложений
         :return: Общее значение характеристики Ловкость
         """
-        return 1 + self.agility_bonus + self.agility_add
+        return AGILITY_START + self.agility_bonus + self.agility_add
 
     def agility_up(self, value: int = 1):
         """
@@ -265,7 +265,7 @@ class Person:
         с учетом всех вложений
         :return: Общее значение характеристики Интеллект
         """
-        return 1 + self.intellect_bonus + self.intellect_add
+        return INTELLECT_START + self.intellect_bonus + self.intellect_add
 
     def intellect_up(self, value: int = 1):
         """
@@ -281,6 +281,12 @@ class Person:
             self.bounty -= value
 
     def characteristic_up(self, characteristic: str, value: int = 1):
+        """
+        Повышение указанной характеристики
+        :param characteristic: strength, agility, intellect
+        :param value: Значение увеличения
+        :return: -
+        """
         if self.bounty >= value:
             if characteristic == "strength":
                 if self.level == 1:
@@ -300,9 +306,32 @@ class Person:
             self.bounty -= value
 
     def initiative_get(self):
-        return (self.initiative_bonus * FACTOR_INITIATIVE_BONUS) + \
-               (self.initiative_add * FACTOR_INITIATIVE_ADD) + \
-               + self.initiative_effect
+        """
+        Возвращает общее значение Инициативы
+        :return: Общее значение Инициативы
+        """
+        result = FACTOR_INITIATIVE_START + \
+                 round(self.level * FACTOR_BURDEN_STRENGTH) + \
+                (self.initiative_bonus * FACTOR_INITIATIVE_BONUS) + \
+                (self.initiative_add * FACTOR_INITIATIVE_ADD) + \
+                 self.initiative_effect
+
+        if result < 0: result = 0
+
+        return result
+
+    def initiative_up(self, value: int = 1):
+        """
+        Повышение Инициативы
+        :param value: Значение увеличения
+        :return: -
+        """
+        if self.bounty >= value:
+            if self.level == 1:
+                self.initiative_bonus += value
+            else:
+                self.initiative_add += value
+            self.bounty -= value
 
     def health_get_all(self):
         return (self.health_bonus * FACTOR_HEALTH_BONUS) + \
@@ -341,7 +370,7 @@ class Person:
         максимальный вес будет равен 0.
         :return: Возвращает максимально возможный вес ноши.
         """
-        result = 24 + (self.strength_get() * FACTOR_BURDEN_INDEX) + \
+        result = 24 + (self.strength_get() * FACTOR_BURDEN_STRENGTH) + \
                (self.burden_bonus * FACTOR_BURDEN_BONUS) + \
                (self.burden_add * FACTOR_BURDEN_ADD) + \
                 self.burden_effect
