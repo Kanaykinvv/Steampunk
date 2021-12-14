@@ -311,7 +311,7 @@ class Person:
         :return: Общее значение Инициативы
         """
         result = FACTOR_INITIATIVE_START + \
-                 round(self.level * FACTOR_BURDEN_STRENGTH) + \
+                 round(self.agility_get() * FACTOR_INITIATIVE_AGILITY) + \
                 (self.initiative_bonus * FACTOR_INITIATIVE_BONUS) + \
                 (self.initiative_add * FACTOR_INITIATIVE_ADD) + \
                  self.initiative_effect
@@ -334,35 +334,90 @@ class Person:
             self.bounty -= value
 
     def health_get_all(self):
-        return (self.health_bonus * FACTOR_HEALTH_BONUS) + \
-               (self.health_add * FACTOR_HEALTH_ADD) + \
-                self.health_effect
+        """
+        Возвращает общее значение Здоровья
+        :return: Общее значение Здоровья
+        """
+        result = FACTOR_HEALTH_START + \
+                 round(self.strength_get() * FACTOR_HEALTH_STRENGTH) + \
+                 (self.health_bonus * FACTOR_HEALTH_BONUS) + \
+                 (self.health_add * FACTOR_HEALTH_ADD) + \
+                 self.health_effect
+
+        if result < 0: result = 1
+
+        return result
 
     def health_get_current(self):
+        """
+        Возвращает текущее Здоровье
+        :return: Текущее Здоровье
+        """
         return self.health_current
 
     def energy_get_all(self):
-        return (self.energy_bonus * FACTOR_ENERGY_BONUS) + \
-               (self.energy_add * FACTOR_ENERGY_ADD) + \
-                self.energy_effect
+        """
+        Возвращает общее значение Энергии
+        :return: Общее значение Энергии
+        """
+        result = FACTOR_ENERGY_START + \
+                 round(self.strength_get() * FACTOR_ENERGY_STRENGTH) + \
+                 (self.energy_bonus * FACTOR_ENERGY_BONUS) + \
+                 (self.energy_add * FACTOR_ENERGY_ADD) + \
+                  self.energy_effect
+
+        if result < 0: result = 1
+
+        return result
 
     def energy_get_current(self):
+        """
+        Возвращает текущую Энергию
+        :return: Текущая Энергия
+        """
         return self.energy_current
 
     def persistence_get(self):
-        return (self.persistence_bonus * FACTOR_ALL_RESISTENCES_BONUS) + \
-               (self.persistence_add * FACTOR_ALL_RESISTENCES_ADD) + \
-                self.persistence_effect
+        """
+        Возвращает значение Стойкости
+        :return: Значение Стойкости
+        """
+        result = round(self.strength_get() * FACTOR_ALL_RESISTENCES_CHAR) + \
+                 (self.persistence_bonus * FACTOR_ALL_RESISTENCES_BONUS) + \
+                 (self.persistence_add * FACTOR_ALL_RESISTENCES_ADD) + \
+                  self.persistence_effect
+
+        if result < 0: result = 0
+
+        return result
 
     def reaction_get(self):
-        return (self.reaction_bonus * FACTOR_ALL_RESISTENCES_BONUS) + \
-               (self.reaction_add * FACTOR_ALL_RESISTENCES_ADD) + \
-                self.reaction_effect
+        """
+        Возвращает значение Реакции
+        :return: Значение Реакции
+        """
+        result = round(self.agility_get() * FACTOR_ALL_RESISTENCES_CHAR) + \
+                 (self.reaction_bonus * FACTOR_ALL_RESISTENCES_BONUS) + \
+                 (self.reaction_add * FACTOR_ALL_RESISTENCES_ADD) + \
+                 self.reaction_effect
+
+        if result < 0: result = 0
+
+        return result
 
     def consciousness_get(self):
-        return (self.consciousness_bonus * FACTOR_ALL_RESISTENCES_BONUS) + \
-               (self.consciousness_add * FACTOR_ALL_RESISTENCES_ADD) + \
-                self.consciousness_effect
+        """
+        Возвращает значение Сознания
+        :return: Значение Сознания
+        """
+        result = round(self.intellect_get() * FACTOR_ALL_RESISTENCES_CHAR) + \
+                 (self.consciousness_bonus * FACTOR_ALL_RESISTENCES_BONUS) + \
+                 (self.consciousness_add * FACTOR_ALL_RESISTENCES_ADD) + \
+                 self.consciousness_effect
+
+        if result < 0: result = 0
+
+        return result
 
     def burden_get_all(self):
         """
