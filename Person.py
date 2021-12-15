@@ -479,7 +479,10 @@ class Person:
         Возвращает текущий вес ноши
         :return: Текущий вес ноши
         """
-        # Необходимо тут проводить считывание всего перечня переносимых вещей
+        result = 0.0
+        for key in self.equipment:
+            result += self.equipment[key][0] * self.equipment[key][1]
+        self.burden_current = result
         return self.burden_current
 
     def burden_up(self, value: int = 1):
@@ -539,24 +542,55 @@ class Person:
                 self.skills[skill_name]["add"] += value
             self.bounty -= value
 
+    def equipment_add(self, name: str, count: int, weight: float):
+        """
+        Добавление предмета в инвентарь.
+        :param name: Наименование предмета
+        :param count: Количество предметов
+        :param weight: Вес предмета (одного)
+        :return: -
+        """
+        if name in self.equipment:
+            self.equipment[name][0] += count
+        else: self.equipment[name] = [count, weight]
 
+        self.burden_get_current()
+
+    def equipment_del(self, name: str):
+        """
+        Удаление предмета из инвентаря
+        :param name: Наименование предмета
+        :return: -
+        """
+        if name in self.equipment:
+            del self.equipment[name]
+            self.burden_get_current()
+
+    def equipment_use(self, name: str, count: int = 1):
+        """
+        Использование предмета из инвентаря
+        :param name: Наименование предмета
+        :param count: Количество использованных предметов
+        :return: -
+        """
+        if (name in self.equipment) and (self.equipment[name][0] >= count):
+            self.equipment[name][0] -= count
+            if self.equipment[name][0] == 0:
+                self.equipment_del(name)
+            self.burden_get_current()
 
 test_pers = Person(level=1)
-print(test_pers)
-print(test_pers.bounty)
-print("Dice = " + test_pers.dice)
-print("="*25)
-test_pers.experience_add(100)
-print(test_pers)
-print(test_pers.bounty)
-print("Dice = " + test_pers.dice)
-print("="*25)
-print("skill_get(Medicine) = " + str(test_pers.skill_get("Medicine")))
-test_pers.intellect_up(5)
-print("skill_get(Medicine) = " + str(test_pers.skill_get("Medicine")))
-print("="*25)
-print("skill_get(HeavyWeapon) = " + str(test_pers.skill_get("HeavyWeapon")))
-test_pers.strength_up(1)
-print("skill_get(HeavyWeapon) = " + str(test_pers.skill_get("HeavyWeapon")))
-print("="*25)
-print("burden_get_all = " + str(test_pers.burden_get_all()))
+print(test_pers.energy_get_all())
+test_pers.equipment_add("Лук", 1, 0.5)
+print(test_pers.equipment)
+print("Вес текущей ноши = " + str(test_pers.burden_current))
+print("*"*50)
+test_pers.equipment_add("Лук", 1, 0.5)
+print(test_pers.equipment)
+print("Вес текущей ноши = " + str(test_pers.burden_current))
+print("*"*50)
+test_pers.equipment_use("Лук", count=2)
+test_pers.equipment_add("Хлеб", 1, 0.5)
+print(test_pers.equipment)
+print("Вес текущей ноши = " + str(test_pers.burden_current))
+print("*"*50)

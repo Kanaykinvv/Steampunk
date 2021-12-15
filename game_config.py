@@ -135,4 +135,4 @@ FACTOR_BURDEN_STRENGTH = 12         # Ноша (индекс по Силе)
 FACTOR_BURDEN_START = 24            # Ноша (стартовое значение)
 
 FACTOR_ALL_SKILLS_BONUS = 3         # Все навыки (бонус)
-FACTOR_ALL_SKILLS_ADD = 2          # Все навыки (улучшение)
+FACTOR_ALL_SKILLS_ADD = 2           # Все навыки (улучшение)
