@@ -180,6 +180,11 @@ class Person:
               }
 
     def __init__(self, name: str = "NoName", level: int = 1):
+        """
+        Инициализация класса
+        :param name: Имя персонажа
+        :param level: Уровень персонажа
+        """
         self.name = name
 
         if (level <= 0) or (level == 1):
@@ -194,21 +199,48 @@ class Person:
         self.dice = DICE_FOR_LEVEL[self.level]
 
     def __str__(self):
+        """
+        Печать текущего класса
+        :return: Вывод имени, уровня и опыта
+        """
         return "Person name is " + self.name + " Level " + str(self.level) + " (experience " + str(self.experience) + ")"
 
     def cash_get(self):
+        """
+        Получить текущее количество валюты
+        :return: Текущее количество валюты
+        """
         return self.cash
 
     def cash_set(self, value: float):
+        """
+        Установить количество валюты на указанное число
+        :param value: Количество валюты
+        :return:
+        """
         self.cash = value
 
     def cash_change(self, value: float):
+        """
+        Изменение количества валюты
+        :param value: Количество валюты
+        :return: -
+        """
         self.cash += value
 
     def experience_get(self):
+        """
+        Текущее колчество опыта
+        :return: Текущее колчество опыта
+        """
         return self.experience
 
     def experience_add(self, value: int):
+        """
+        Увеличение опыта
+        :param value: Количество полученного опыта
+        :return: -
+        """
         self.experience += value
 
         if self.level < (1 + (self.experience // EXP_FOR_NEXT_LEVEL)):
@@ -519,7 +551,6 @@ class Person:
             elif self.skills[skill_name]["type"] == "intellect":
                 characteristic = self.intellect_get()
 
-            # Дополнительно включить type в расчет
             return \
                 1 + (characteristic // 2) + \
                 (bonus * FACTOR_ALL_RESISTENCES_BONUS) + \
@@ -579,8 +610,8 @@ class Person:
                 self.equipment_del(name)
             self.burden_get_current()
 
+# =========== Тесты по методам ===========
 test_pers = Person(level=1)
-print(test_pers.energy_get_all())
 test_pers.equipment_add("Лук", 1, 0.5)
 print(test_pers.equipment)
 print("Вес текущей ноши = " + str(test_pers.burden_current))
