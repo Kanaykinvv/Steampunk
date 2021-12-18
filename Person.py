@@ -648,21 +648,60 @@ class Person:
         :param value: Значение, на которое необходимо увеличить указанный параметр
         :return: -
         """
-        # if self.bounty >= value:
-        #     if name == "strength":
-        #         if self.level == 1:
-        #             self.intellect_bonus += value
-        #         else:
-        #             self.intellect_add += value
-        #     elif characteristic == "agility":
-        #         if self.level == 1:
-        #             self.agility_bonus += value
-        #         else:
-        #             self.agility_add += value
-        #     elif characteristic == "intellect":
-        #         if self.level == 1:
-        #             self.intellect_bonus += value
-        #         else:
-        #             self.intellect_add += value
-        #     self.bounty -= value
-    pass
+        if name == "strength":
+            self.strength_up()
+        elif name == "agility":
+            self.agility_up()
+        elif name == "intellect":
+            self.intellect_up()
+        elif name == "initiative":
+            self.initiative_up()
+        elif name == "health":
+            self.health_up()
+        elif name == "energy":
+            self.energy_up()
+        elif name == "persistence":
+            self.persistence_up()
+        elif name == "reaction":
+            self.reaction_up()
+        elif name == "consciousness":
+            self.consciousness_up()
+        elif name == "burden":
+            self.burden_up()
+        elif name == "athletics":
+            self.skill_up("athletics")
+        elif name == "no_weapons":
+            self.skill_up("no_weapons")
+        elif name == "endurance":
+            self.skill_up("endurance")
+        elif name == "throwing":
+            self.skill_up("throwing")
+        elif name == "heavy_weapon":
+            self.skill_up("heavy_weapon")
+        elif name == "cold_weapon":
+            self.skill_up("cold_weapon")
+        elif name == "gambl":
+            self.skill_up("gambl")
+        elif name == "acrobatics":
+            self.skill_up("acrobatics")
+        elif name == "theft":
+            self.skill_up("theft")
+        elif name == "light_weapon":
+            self.skill_up("light_weapon")
+        elif name == "traps":
+            self.skill_up("traps")
+        elif name == "observation":
+            self.skill_up("observation")
+        elif name == "hack":
+            self.skill_up("hack")
+        elif name == "hightech_weapons":
+            self.skill_up("hightech_weapons")
+        elif name == "engineering":
+            self.skill_up("engineering")
+        elif name == "medicine":
+            self.skill_up("medicine")
+        elif name == "negotiation":
+            self.skill_up("negotiation")
+        elif name == "trade":
+            self.skill_up("trade")
+

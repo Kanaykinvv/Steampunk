@@ -5,38 +5,35 @@ from Person import Person
 type_person = {
     "warrior" : {                       # Тип - Воин
         "strength": 30,                 # Сила
-        "agility": 30,                  # Ловкость
-        "intellect": 0,                 # Интеллект
+        "agility": 10,                  # Ловкость
+        "intellect": 5,                 # Интеллект
         "initiative": 0,                # Инициатива
-        "health": 0,                    # Здоровье
-        "energy": 0,                    # Энергия
-        "persistence": 0,               # Стойкость
-        "reaction": 0,                  # Реакция
+        "health": 20,                   # Здоровье
+        "energy": 5,                    # Энергия
+        "persistence": 5,               # Стойкость
+        "reaction": 3,                  # Реакция
         "consciousness": 0,             # Сознание
         "burden": 0,                    # Ноша
         "athletics": 0,                 # Навык - Атлетика
-        "no_weapons": 0,                # Навык - Без оружия
+        "no_weapons": 25,               # Навык - Без оружия
         "endurance": 0,                 # Навык - Выносливость
-        "throwing": 0,                  # Навык - Метание
-        "heavy_weapon": 0,              # Навык - Тяжёлое оружие
-        "cold_weapon": 0,               # Навык - Холодное оружие
+        "throwing": 15,                 # Навык - Метание
+        "heavy_weapon": 25,             # Навык - Тяжёлое оружие
+        "cold_weapon": 25,              # Навык - Холодное оружие
         "gambl": 0,                     # Навык - Азартные игры
-        "acrobatics": 0,                # Навык - Акробатика
+        "acrobatics": 5,                # Навык - Акробатика
         "theft": 0,                     # Навык - Воровство
-        "light_weapon": 0,              # Навык - Лёгкое оружие
+        "light_weapon": 25,             # Навык - Лёгкое оружие
         "traps": 0,                     # Навык - Ловушки
         "observation": 0,               # Навык - Наблюдательность
         "hack": 0,                      # Навык - Взлом
         "hightech_weapons": 0,          # Навык - Высокотехнологичное оружие
         "engineering": 0,               # Навык - Инженерия
         "medicine": 0,                  # Навык - Медицина
-        "negotiation": 0,               # Навык - Переговоры
+        "negotiation": 5,               # Навык - Переговоры
         "trade": 0,                     # Навык - Торговля
     }
 }
-
-
-
 
 def create_person(type: str, level: int = 1):
 
@@ -65,30 +62,10 @@ def create_person(type: str, level: int = 1):
                     current_key = key
                     break
 
-            if current_key == "strength":
-                person.strength_up()
-            elif current_key == "agility":
-                person.agility_up()
-            elif current_key == "intellect":
-                person.intellect_up()
-            elif current_key == "initiative":
-                person.initiative_up()
-            elif current_key == "health":
-                person.health_up()
-            elif current_key == "energy":
-                person.energy_up()
-            elif current_key == "persistence":
-                person.persistence_up()
-            elif current_key == "reaction":
-                person.reaction_up()
-            elif current_key == "consciousness":
-                person.consciousness_up()
+            person.parameter_up(name=current_key)
 
-            elif current_key == "strength":
-                person.strength_up()
-            elif current_key == "strength":
-                person.strength_up()
-            elif current_key == "strength":
-                person.strength_up()
-            elif current_key == "strength":
-                person.strength_up()
+        return person
+    else:
+        return None
+
+my_test_person = create_person(type="warrior")
