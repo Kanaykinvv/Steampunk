@@ -203,7 +203,22 @@ class Person:
         Печать текущего класса
         :return: Вывод имени, уровня и опыта
         """
-        return "Person name is " + self.name + " Level " + str(self.level) + " (experience " + str(self.experience) + ")"
+        result = "="*50 + "\n" + \
+                 "ОСНОВНАЯ ИНФОРМАЦИЯ" + "\n" + \
+                 "=" * 50 + "\n" + \
+                 "Имя персонажа: " + self.name + "\n" + \
+                 "Текущий уровень: " + str(self.level) + "\n" + \
+                 "Количество текущего опыта: " + str(self.experience_get()) + "\n" + \
+                 "Количество денежных средств: " + str(self.cash_get()) + "\n" + \
+                 "Текущий кубик: " + self.dice + "\n" + \
+                 "Текущие очки развития: " + str(self.bounty) + "\n" + \
+                 "=" * 50 + "\n" + \
+                 "ХАРАКТЕРИСТИКИ" + "\n" + \
+                 "Сила " + "\t\t" + str(self.strength_get()) + "\n" + \
+                 "Ловкость " + "\t" + str(self.agility_get()) + "\n" + \
+                 "Интеллект " + "\t" + str(self.intellect_get()) + "\n" + \
+                 "!!!"
+        return result
 
     def cash_get(self):
         """

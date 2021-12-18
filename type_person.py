@@ -43,6 +43,7 @@ def create_person(type: str, level: int = 1):
         parameter_priority = {k: v for k, v in sorted(type_person[type].items(),
                                                       key=lambda item: item[1],
                                                       reverse=True)}
+        # Указано для теста проверки сортировки
         print(parameter_priority)
 
         max_random = 0
@@ -68,4 +69,6 @@ def create_person(type: str, level: int = 1):
     else:
         return None
 
+
 my_test_person = create_person(type="warrior")
+print(my_test_person)
