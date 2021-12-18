@@ -53,126 +53,126 @@ class Person:
 
     skills = {
         # Навык - Атлетика
-        "Athletics":
+        "athletics":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "strength"},
 
         # Навык - Без оружия
-        "NoWeapons":
+        "no_weapons":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "strength"},
 
         # Навык - Выносливость
-        "Endurance":
+        "endurance":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "strength"},
 
         # Навык - Метание
-        "Throwing":
+        "throwing":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "strength"},
 
         # Навык - Тяжёлое оружие
-        "HeavyWeapon":
+        "heavy_weapon":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "strength"},
 
         # Навык - Холодное оружие
-        "ColdWeapon":
+        "cold_weapon":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "strength"},
 
         # Навык - Азартные игры
-        "Gambl":
+        "gambl":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "agility"},
 
         # Навык - Акробатика
-        "Acrobatics":
+        "acrobatics":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "agility"},
 
         # Навык - Воровство
-        "Theft":
+        "theft":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "agility"},
 
         # Навык - Лёгкое оружие
-        "LightWeapon":
+        "light_weapon":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "agility"},
 
         # Навык - Ловушки
-        "Traps":
+        "traps":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "agility"},
 
         # Навык - Наблюдательность
-        "Observation":
+        "observation":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "agility"},
 
         # Навык - Взлом
-        "Hack":
+        "hack":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "intellect"},
 
         # Навык - Высокотехнологичное оружие
-        "HightechWeapons":
+        "hightech_weapons":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "intellect"},
 
         # Навык - Инженерия
-        "Engineering":
+        "engineering":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "intellect"},
 
         # Навык - Медицина
-        "Medicine":
+        "medicine":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "intellect"},
 
         # Навык - Переговоры
-        "Negotiation":
+        "negotiation":
             {"bonus": 0,
              "add": 0,
              "effect": {},
              "type": "intellect"},
 
         # Навык - Торговля
-        "Trade":
+        "trade":
             {"bonus": 0,
              "add": 0,
              "effect": {},
@@ -312,31 +312,6 @@ class Person:
                 self.intellect_add += value
             self.bounty -= value
 
-    def characteristic_up(self, characteristic: str, value: int = 1):
-        """
-        Повышение указанной характеристики
-        :param characteristic: strength, agility, intellect
-        :param value: Значение увеличения
-        :return: -
-        """
-        if self.bounty >= value:
-            if characteristic == "strength":
-                if self.level == 1:
-                    self.intellect_bonus += value
-                else:
-                    self.intellect_add += value
-            elif characteristic == "agility":
-                if self.level == 1:
-                    self.agility_bonus += value
-                else:
-                    self.agility_add += value
-            elif characteristic == "intellect":
-                if self.level == 1:
-                    self.intellect_bonus += value
-                else:
-                    self.intellect_add += value
-            self.bounty -= value
-
     def initiative_get(self):
         """
         Возвращает общее значение Инициативы
@@ -387,6 +362,19 @@ class Person:
         """
         return self.health_current
 
+    def health_up(self, value: int = 1):
+        """
+        Увеличение параметра Здоровье
+        :param value: Значение увеличения
+        :return: -
+        """
+        if self.bounty >= value:
+            if self.level == 1:
+                self.health_bonus += value
+            else:
+                self.health_add += value
+            self.bounty -= value
+
     def energy_get_all(self):
         """
         Возвращает общее значение Энергии
@@ -408,6 +396,19 @@ class Person:
         :return: Текущая Энергия
         """
         return self.energy_current
+
+    def energy_up(self, value: int = 1):
+        """
+        Увеличение параметра Энергия
+        :param value: Значение увеличения
+        :return: -
+        """
+        if self.bounty >= value:
+            if self.level == 1:
+                self.energy_bonus += value
+            else:
+                self.energy_add += value
+            self.bounty -= value
 
     def persistence_get(self):
         """
@@ -575,17 +576,18 @@ class Person:
 
     def equipment_add(self, name: str, count: int, weight: float):
         """
-        Добавление предмета в инвентарь.
+        Добавление предмета в инвентарь, если есть свободный вес (ноша)
         :param name: Наименование предмета
         :param count: Количество предметов
         :param weight: Вес предмета (одного)
         :return: -
         """
-        if name in self.equipment:
-            self.equipment[name][0] += count
-        else: self.equipment[name] = [count, weight]
+        if self.burden_current >= weight:
+            if name in self.equipment:
+                self.equipment[name][0] += count
+            else: self.equipment[name] = [count, weight]
 
-        self.burden_get_current()
+            self.burden_get_current()
 
     def equipment_del(self, name: str):
         """
@@ -610,18 +612,57 @@ class Person:
                 self.equipment_del(name)
             self.burden_get_current()
 
-# =========== Тесты по методам ===========
-test_pers = Person(level=1)
-test_pers.equipment_add("Лук", 1, 0.5)
-print(test_pers.equipment)
-print("Вес текущей ноши = " + str(test_pers.burden_current))
-print("*"*50)
-test_pers.equipment_add("Лук", 1, 0.5)
-print(test_pers.equipment)
-print("Вес текущей ноши = " + str(test_pers.burden_current))
-print("*"*50)
-test_pers.equipment_use("Лук", count=2)
-test_pers.equipment_add("Хлеб", 1, 0.5)
-print(test_pers.equipment)
-print("Вес текущей ноши = " + str(test_pers.burden_current))
-print("*"*50)
+    def parameter_up(self, name: str, value: int = 1):
+        """
+        Повышение любого параметра на указанную величину (по умолчанию на 1)
+        :param name: Наименование параметра.
+        Принимает значение:
+            "strength"                  # Сила
+            "agility"                   # Ловкость
+            "intellect"                 # Интеллект
+            "initiative"                # Инициатива
+            "health"                    # Здоровье
+            "energy"                    # Энергия
+            "persistence"               # Стойкость
+            "reaction"                  # Реакция
+            "consciousness"             # Сознание
+            "burden"                    # Ноша
+            "athletics"                 # Навык - Атлетика
+            "no_weapons"                # Навык - Без оружия
+            "endurance"                 # Навык - Выносливость
+            "throwing"                  # Навык - Метание
+            "heavy_weapon"              # Навык - Тяжёлое оружие
+            "cold_weapon"               # Навык - Холодное оружие
+            "gambl"                     # Навык - Азартные игры
+            "acrobatics"                # Навык - Акробатика
+            "theft"                     # Навык - Воровство
+            "light_weapon"              # Навык - Лёгкое оружие
+            "traps"                     # Навык - Ловушки
+            "observation"               # Навык - Наблюдательность
+            "hack"                      # Навык - Взлом
+            "hightech_weapons"          # Навык - Высокотехнологичное оружие
+            "engineering"               # Навык - Инженерия
+            "medicine"                  # Навык - Медицина
+            "negotiation"               # Навык - Переговоры
+            "trade"                     # Навык - Торговля
+        :param value: Значение, на которое необходимо увеличить указанный параметр
+        :return: -
+        """
+        # if self.bounty >= value:
+        #     if name == "strength":
+        #         if self.level == 1:
+        #             self.intellect_bonus += value
+        #         else:
+        #             self.intellect_add += value
+        #     elif characteristic == "agility":
+        #         if self.level == 1:
+        #             self.agility_bonus += value
+        #         else:
+        #             self.agility_add += value
+        #     elif characteristic == "intellect":
+        #         if self.level == 1:
+        #             self.intellect_bonus += value
+        #         else:
+        #             self.intellect_add += value
+        #     self.bounty -= value
+    pass
