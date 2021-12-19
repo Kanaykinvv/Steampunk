@@ -198,28 +198,6 @@ class Person:
 
         self.dice = DICE_FOR_LEVEL[self.level]
 
-    def __str__(self):
-        """
-        Печать текущего класса
-        :return: Вывод имени, уровня и опыта
-        """
-        result = "="*50 + "\n" + \
-                 "ОСНОВНАЯ ИНФОРМАЦИЯ" + "\n" + \
-                 "=" * 50 + "\n" + \
-                 "Имя персонажа: " + self.name + "\n" + \
-                 "Текущий уровень: " + str(self.level) + "\n" + \
-                 "Количество текущего опыта: " + str(self.experience_get()) + "\n" + \
-                 "Количество денежных средств: " + str(self.cash_get()) + "\n" + \
-                 "Текущий кубик: " + self.dice + "\n" + \
-                 "Текущие очки развития: " + str(self.bounty) + "\n" + \
-                 "=" * 50 + "\n" + \
-                 "ХАРАКТЕРИСТИКИ" + "\n" + \
-                 "Сила " + "\t\t" + str(self.strength_get()) + "\n" + \
-                 "Ловкость " + "\t" + str(self.agility_get()) + "\n" + \
-                 "Интеллект " + "\t" + str(self.intellect_get()) + "\n" + \
-                 "!!!"
-        return result
-
     def cash_get(self):
         """
         Получить текущее количество валюты
@@ -720,3 +698,33 @@ class Person:
         elif name == "trade":
             self.skill_up("trade")
 
+    def __str__(self):
+        """
+        Печать текущего класса
+        :return: Вывод имени, уровня и опыта
+        """
+        result = "="*50 + "\n" + \
+                 "ОСНОВНАЯ ИНФОРМАЦИЯ" + "\n" + \
+                 "=" * 50 + "\n" + \
+                 "Имя персонажа: " + self.name + "\n" + \
+                 "Текущий уровень: " + str(self.level) + "\n" + \
+                 "Количество текущего опыта: " + str(self.experience_get()) + "\n" + \
+                 "Количество денежных средств: " + str(self.cash_get()) + "\n" + \
+                 "Текущий кубик: " + self.dice + "\n" + \
+                 "Текущие очки развития: " + str(self.bounty) + "\n" + \
+                 "=" * 50 + "\n" + \
+                 "ХАРАКТЕРИСТИКИ" + "\n" + \
+                 "=" * 50 + "\n" + \
+                 "Сила " + "\t\t" + str(self.strength_get()) + "\n" + \
+                 "Ловкость " + "\t" + str(self.agility_get()) + "\n" + \
+                 "Интеллект " + "\t" + str(self.intellect_get()) + "\n" + \
+                 "=" * 50 + "\n" + \
+                 "Здоровье " + "\t" + str(self.health_get_current()) + " / " + str(self.health_get_all()) + "\n" + \
+                 "Энергия " + "\t" + str(self.energy_get_current()) + " / " + str(self.energy_get_all()) + "\n" + \
+                 "Инициатива " + "\t" + str(self.initiative_get()) + "\n" + \
+                 "Стойкость " + "\t" + str(self.persistence_get()) + "\n" + \
+                 "Реакция " + "\t" + str(self.reaction_get()) + "\n" + \
+                 "Сознание " + "\t" + str(self.consciousness_get()) + "\n" + \
+                 "Ноша " + "\t" + str(self.burden_get_current()) + " / " + str(self.burden_get_all())
+
+        return result
