@@ -356,6 +356,17 @@ class Person:
                 self.health_add += value
             self.bounty -= value
 
+    def health_change(self, value: int):
+        """
+        Изменение параметра Здоровье
+        :param value: Значение изменения
+        :return: -
+        """
+        if self.health_current + value < 0:
+            self.health_current = 0
+        else:
+            self.health_current += value
+
     def energy_get_all(self):
         """
         Возвращает общее значение Энергии
@@ -748,4 +759,6 @@ class Person:
 test_pers = Person(level=2)
 print(test_pers)
 test_pers.strength_up()
+print(test_pers)
+test_pers.health_change(-5)
 print(test_pers)
