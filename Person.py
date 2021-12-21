@@ -179,25 +179,6 @@ class Person:
              "type": "intellect"},
               }
 
-    def __init__(self, name: str = "NoName", level: int = 1):
-        """
-        Инициализация класса
-        :param name: Имя персонажа
-        :param level: Уровень персонажа
-        """
-        self.name = name
-
-        if (level <= 0) or (level == 1):
-            self.level = 1
-            self.experience = 0
-            self.bounty = ADD_BOUNTY_FOR_FIRS_LEVEL
-        else:
-            self.level = level
-            self.experience = (level - 1) * EXP_FOR_NEXT_LEVEL
-            self.bounty = ADD_BOUNTY_FOR_FIRS_LEVEL + (self.level - 1) * ADD_BOUNTY_FOR_LEVEL
-
-        self.dice = DICE_FOR_LEVEL[self.level]
-
     def cash_get(self):
         """
         Получить текущее количество валюты
@@ -257,11 +238,18 @@ class Person:
         :return: -
         """
         if self.bounty >= value:
+
+            health_diff_current = self.health_get_all() - self.health_get_current()
+
             if self.level == 1:
                 self.strength_bonus += value
             else:
                 self.strength_add += value
             self.bounty -= value
+
+            self.health_current = self.health_get_all() - health_diff_current
+
+
 
     def agility_get(self):
         """
@@ -698,6 +686,28 @@ class Person:
         elif name == "trade":
             self.skill_up("trade")
 
+    def __init__(self, name: str = "NoName", level: int = 1):
+        """
+        Инициализация класса, определение опыта и дайса, исходя из уровня.
+        Установка значения Здоровья и Энергии.
+        :param name: Имя персонажа
+        :param level: Уровень персонажа
+        """
+        self.name = name
+
+        if (level <= 0) or (level == 1):
+            self.level = 1
+            self.experience = 0
+            self.bounty = ADD_BOUNTY_FOR_FIRS_LEVEL
+        else:
+            self.level = level
+            self.experience = (level - 1) * EXP_FOR_NEXT_LEVEL
+            self.bounty = ADD_BOUNTY_FOR_FIRS_LEVEL + (self.level - 1) * ADD_BOUNTY_FOR_LEVEL
+
+        self.dice = DICE_FOR_LEVEL[self.level]
+        self.health_current = self.health_get_all()
+        self.energy_current = self.energy_get_all()
+
     def __str__(self):
         """
         Печать текущего класса
@@ -730,6 +740,12 @@ class Person:
         return result
 
     # Проблемы:
-    # - Изначальное количество Здоровье и Энергии
     # - Изменение показателя текущего Здоровья и Энергии при изменении Характеристик
     # - Перерсчет всех показателей при добавлении/исключении Эффектов
+
+# Tests
+
+test_pers = Person(level=2)
+print(test_pers)
+test_pers.strength_up()
+print(test_pers)
