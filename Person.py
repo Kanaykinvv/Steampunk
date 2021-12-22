@@ -233,13 +233,14 @@ class Person:
 
     def strength_up(self, value: int = 1):
         """
-        Повышение характеристики Сила
+        Повышение характеристики Сила (с учетом повышения Здоровья и Энергии)
         :param value: Значение увеличения
         :return: -
         """
         if self.bounty >= value:
 
             health_diff_current = self.health_get_all() - self.health_get_current()
+            energy_diff_current = self.energy_get_all() - self.energy_get_current()
 
             if self.level == 1:
                 self.strength_bonus += value
@@ -248,8 +249,7 @@ class Person:
             self.bounty -= value
 
             self.health_current = self.health_get_all() - health_diff_current
-
-
+            self.energy_current = self.energy_get_all() - energy_diff_current
 
     def agility_get(self):
         """
@@ -401,6 +401,17 @@ class Person:
             else:
                 self.energy_add += value
             self.bounty -= value
+
+    def energy_change(self, value: int):
+        """
+        Изменение параметра Энергия
+        :param value: Значение изменения
+        :return: -
+        """
+        if self.energy_current + value < 0:
+            self.energy_current = 0
+        else:
+            self.energy_current += value
 
     def persistence_get(self):
         """
@@ -751,7 +762,6 @@ class Person:
         return result
 
     # Проблемы:
-    # - Изменение показателя текущего Здоровья и Энергии при изменении Характеристик
     # - Перерсчет всех показателей при добавлении/исключении Эффектов
 
 # Tests
@@ -760,5 +770,8 @@ test_pers = Person(level=2)
 print(test_pers)
 test_pers.strength_up()
 print(test_pers)
+test_pers.energy_change(-3)
 test_pers.health_change(-5)
+print(test_pers)
+test_pers.strength_up()
 print(test_pers)
