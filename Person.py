@@ -537,6 +537,24 @@ class Person:
         """
         Определяет и возвращает общий бонус по указанному Навыку
         :param skill_name: Наименование навыка
+            "athletics"                 # Навык - Атлетика
+            "no_weapons"                # Навык - Без оружия
+            "endurance"                 # Навык - Выносливость
+            "throwing"                  # Навык - Метание
+            "heavy_weapon"              # Навык - Тяжёлое оружие
+            "cold_weapon"               # Навык - Холодное оружие
+            "gambl"                     # Навык - Азартные игры
+            "acrobatics"                # Навык - Акробатика
+            "theft"                     # Навык - Воровство
+            "light_weapon"              # Навык - Лёгкое оружие
+            "traps"                     # Навык - Ловушки
+            "observation"               # Навык - Наблюдательность
+            "hack"                      # Навык - Взлом
+            "hightech_weapons"          # Навык - Высокотехнологичное оружие
+            "engineering"               # Навык - Инженерия
+            "medicine"                  # Навык - Медицина
+            "negotiation"               # Навык - Переговоры
+            "trade"                     # Навык - Торговля
         :return: Общий бонус по указанному Навыку, или None, если Навык отсутствует
         """
         if self.skills.get(skill_name):
@@ -736,28 +754,53 @@ class Person:
         :return: Вывод имени, уровня и опыта
         """
         result = "="*50 + "\n" + \
-                 "ОСНОВНАЯ ИНФОРМАЦИЯ" + "\n" + \
+                 "ОСНОВНАЯ ИНФОРМАЦИЯ".center(50, " ") + "\n" + \
                  "=" * 50 + "\n" + \
-                 "Имя персонажа: " + self.name + "\n" + \
-                 "Текущий уровень: " + str(self.level) + "\n" + \
-                 "Количество текущего опыта: " + str(self.experience_get()) + "\n" + \
-                 "Количество денежных средств: " + str(self.cash_get()) + "\n" + \
-                 "Текущий кубик: " + self.dice + "\n" + \
-                 "Текущие очки развития: " + str(self.bounty) + "\n" + \
+                 "Имя персонажа: ".ljust(30, " ") + self.name + "\n" + \
+                 "Текущий уровень: ".ljust(30, " ") + str(self.level) + "\n" + \
+                 "Количество текущего опыта: ".ljust(30, " ") + str(self.experience_get()) + "\n" + \
+                 "Количество денежных средств: ".ljust(30, " ") + str(self.cash_get()) + "\n" + \
+                 "Текущий кубик: ".ljust(30, " ") + self.dice + "\n" + \
+                 "Текущие очки развития: ".ljust(30, " ") + str(self.bounty) + "\n" + \
                  "=" * 50 + "\n" + \
-                 "ХАРАКТЕРИСТИКИ" + "\n" + \
+                 "ХАРАКТЕРИСТИКИ".center(50, " ") + "\n" + \
                  "=" * 50 + "\n" + \
-                 "Сила " + "\t\t" + str(self.strength_get()) + "\n" + \
-                 "Ловкость " + "\t" + str(self.agility_get()) + "\n" + \
-                 "Интеллект " + "\t" + str(self.intellect_get()) + "\n" + \
+                 "Сила ".ljust(30, " ") + str(self.strength_get()) + "\n" + \
+                 "Ловкость ".ljust(30, " ") + str(self.agility_get()) + "\n" + \
+                 "Интеллект ".ljust(30, " ") + str(self.intellect_get()) + "\n" + \
                  "=" * 50 + "\n" + \
-                 "Здоровье " + "\t" + str(self.health_get_current()) + " / " + str(self.health_get_all()) + "\n" + \
-                 "Энергия " + "\t" + str(self.energy_get_current()) + " / " + str(self.energy_get_all()) + "\n" + \
-                 "Инициатива " + "\t" + str(self.initiative_get()) + "\n" + \
-                 "Стойкость " + "\t" + str(self.persistence_get()) + "\n" + \
-                 "Реакция " + "\t" + str(self.reaction_get()) + "\n" + \
-                 "Сознание " + "\t" + str(self.consciousness_get()) + "\n" + \
-                 "Ноша " + "\t" + str(self.burden_get_current()) + " / " + str(self.burden_get_all())
+                 "Здоровье ".ljust(30, " ") + str(self.health_get_current()) + " / " + str(self.health_get_all()) + "\n" + \
+                 "Энергия ".ljust(30, " ") + str(self.energy_get_current()) + " / " + str(self.energy_get_all()) + "\n" + \
+                 "-" * 50 + "\n" + \
+                 "Инициатива ".ljust(30, " ") + str(self.initiative_get()) + "\n" + \
+                 "Стойкость ".ljust(30, " ") + str(self.persistence_get()) + "\n" + \
+                 "Реакция ".ljust(30, " ") + str(self.reaction_get()) + "\n" + \
+                 "Сознание ".ljust(30, " ") + str(self.consciousness_get()) + "\n" + \
+                 "Ноша ".ljust(30, " ") + str(self.burden_get_current()) + " / " + str(self.burden_get_all()) + "\n" + \
+                 "=" * 50 + "\n" + \
+                 "НАВЫКИ".center(50, " ") + "\n" + \
+                 "=" * 50 + "\n" + \
+                 "Навык - Атлетика ".ljust(48, "·") + " " + str(self.skill_get("athletics")) + "\n" + \
+                 "Навык - Без оружия ".ljust(48, "·") + " " + str(self.skill_get("no_weapons")) + "\n" + \
+                 "Навык - Выносливость ".ljust(48, "·") + " " + str(self.skill_get("endurance")) + "\n" + \
+                 "Навык - Метание ".ljust(48, "·") + " " + str(self.skill_get("throwing")) + "\n" + \
+                 "Навык - Тяжёлое оружие ".ljust(48, "·") + " " + str(self.skill_get("heavy_weapon")) + "\n" + \
+                 "Навык - Холодное оружие ".ljust(48, "·") + " " + str(self.skill_get("cold_weapon")) + "\n" + \
+                 "-" * 50 + "\n" + \
+                 "Навык - Азартные игры ".ljust(48, "·") + " " + str(self.skill_get("gambl")) + "\n" + \
+                 "Навык - Акробатика ".ljust(48, "·") + " " + str(self.skill_get("acrobatics")) + "\n" + \
+                 "Навык - Воровство ".ljust(48, "·") + " " + str(self.skill_get("theft")) + "\n" + \
+                 "Навык - Лёгкое оружие ".ljust(48, "·") + " " + str(self.skill_get("light_weapon")) + "\n" + \
+                 "Навык - Ловушки ".ljust(48, "·") + " " + str(self.skill_get("traps")) + "\n" + \
+                 "Навык - Наблюдательность ".ljust(48, "·") + " " + str(self.skill_get("observation")) + "\n" + \
+                 "-" * 50 + "\n" + \
+                 "Навык - Взлом ".ljust(48, "·") + " " + str(self.skill_get("hack")) + "\n" + \
+                 "Навык - Высокотехнологичное оружие ".ljust(48, "·") + " " + str(self.skill_get("hightech_weapons")) + "\n" + \
+                 "Навык - Инженерия ".ljust(48, "·") + " " + str(self.skill_get("engineering")) + "\n" + \
+                 "Навык - Медицина ".ljust(48, "·") + " " + str(self.skill_get("medicine")) + "\n" + \
+                 "Навык - Переговоры ".ljust(48, "·") + " " + str(self.skill_get("negotiation")) + "\n" + \
+                 "Навык - Торговля ".ljust(48, "·") + " " + str(self.skill_get("trade")) + "\n" + \
+                 "-" * 50 + "\n"
 
         return result
 
