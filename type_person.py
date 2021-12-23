@@ -70,5 +70,6 @@ def create_person(type: str, level: int = 1):
         return None
 
 
-my_test_person = create_person(type="warrior")
+my_test_person = create_person(type="warrior", level=5)
 print(my_test_person)
+my_test_person.update_log_print()

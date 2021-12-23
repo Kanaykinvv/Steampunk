@@ -1,3 +1,5 @@
+import datetime
+
 from game_config import *
 
 class Person:
@@ -179,6 +181,16 @@ class Person:
              "type": "intellect"},
               }
 
+    # Хронология прокачки персонажа
+    update_log = []
+
+    def update_log_add(self, message: str):
+        self.update_log.append([datetime.datetime.now(), message])
+
+    def update_log_print(self):
+        for unit in self.update_log:
+            print(str(unit[0]).ljust(10) + unit[1])
+
     def cash_get(self):
         """
         Получить текущее количество валюты
@@ -193,6 +205,7 @@ class Person:
         :return:
         """
         self.cash = value
+        self.update_log_add("[cash_set]".ljust(20) + str(value))
 
     def cash_change(self, value: float):
         """
@@ -201,6 +214,7 @@ class Person:
         :return: -
         """
         self.cash += value
+        self.update_log_add("[cash_change]".ljust(20) + str(value))
 
     def experience_get(self):
         """
@@ -216,12 +230,17 @@ class Person:
         :return: -
         """
         self.experience += value
+        self.update_log_add("[experience_add]".ljust(20) + str(value))
 
         if self.level < (1 + (self.experience // EXP_FOR_NEXT_LEVEL)):
             tmp_lvl = (1 + (self.experience // EXP_FOR_NEXT_LEVEL)) - self.level
             self.level += tmp_lvl
             self.bounty += (ADD_BOUNTY_FOR_LEVEL * tmp_lvl)
             self.dice = DICE_FOR_LEVEL[self.level]
+            self.update_log_add("[experience_add]".ljust(20) + "Level up!")
+            self.update_log_add("[experience_add]".ljust(20) + "level = " + str(self.level))
+            self.update_log_add("[experience_add]".ljust(20) + "bounty = " + str(self.bounty))
+            self.update_log_add("[experience_add]".ljust(20) + "dice = " + str(self.dice))
 
     def strength_get(self):
         """
@@ -251,6 +270,8 @@ class Person:
             self.health_current = self.health_get_all() - health_diff_current
             self.energy_current = self.energy_get_all() - energy_diff_current
 
+            self.update_log_add("[strength_up]".ljust(20) + str(value))
+
     def agility_get(self):
         """
         Возвращает общее значение характеристики Ловкость,
@@ -266,11 +287,15 @@ class Person:
         :return: -
         """
         if self.bounty >= value:
+
             if self.level == 1:
                 self.agility_bonus += value
             else:
                 self.agility_add += value
+
             self.bounty -= value
+
+            self.update_log_add("[agility_up]".ljust(20) + str(value))
 
     def intellect_get(self):
         """
@@ -287,11 +312,15 @@ class Person:
         :return: -
         """
         if self.bounty >= value:
+
             if self.level == 1:
                 self.intellect_bonus += value
             else:
                 self.intellect_add += value
+
             self.bounty -= value
+
+            self.update_log_add("[intellect_up]".ljust(20) + str(value))
 
     def initiative_get(self):
         """
@@ -315,11 +344,15 @@ class Person:
         :return: -
         """
         if self.bounty >= value:
+
             if self.level == 1:
                 self.initiative_bonus += value
             else:
                 self.initiative_add += value
+
             self.bounty -= value
+
+            self.update_log_add("[initiative_up]".ljust(20) + str(value))
 
     def health_get_all(self):
         """
@@ -350,11 +383,15 @@ class Person:
         :return: -
         """
         if self.bounty >= value:
+
             if self.level == 1:
                 self.health_bonus += value
             else:
                 self.health_add += value
+
             self.bounty -= value
+
+            self.update_log_add("[health_up]".ljust(20) + str(value))
 
     def health_change(self, value: int):
         """
@@ -366,6 +403,8 @@ class Person:
             self.health_current = 0
         else:
             self.health_current += value
+
+        self.update_log_add("[health_change]".ljust(20) + str(value))
 
     def energy_get_all(self):
         """
@@ -402,6 +441,8 @@ class Person:
                 self.energy_add += value
             self.bounty -= value
 
+            self.update_log_add("[energy_up]".ljust(20) + str(value))
+
     def energy_change(self, value: int):
         """
         Изменение параметра Энергия
@@ -412,6 +453,8 @@ class Person:
             self.energy_current = 0
         else:
             self.energy_current += value
+
+        self.update_log_add("[energy_change]".ljust(20) + str(value))
 
     def persistence_get(self):
         """
@@ -434,11 +477,15 @@ class Person:
         :return: -
         """
         if self.bounty >= value:
+
             if self.level == 1:
                 self.persistence_bonus += value
             else:
                 self.persistence_add += value
+
             self.bounty -= value
+
+            self.update_log_add("[persistence_up]".ljust(20) + str(value))
 
     def reaction_get(self):
         """
@@ -461,11 +508,15 @@ class Person:
         :return: -
         """
         if self.bounty >= value:
+
             if self.level == 1:
                 self.reaction_bonus += value
             else:
                 self.reaction_add += value
+
             self.bounty -= value
+
+            self.update_log_add("[reaction_up]".ljust(20) + str(value))
 
     def consciousness_get(self):
         """
@@ -488,11 +539,15 @@ class Person:
         :return: -
         """
         if self.bounty >= value:
+
             if self.level == 1:
                 self.consciousness_bonus += value
             else:
                 self.consciousness_add += value
+
             self.bounty -= value
+
+            self.update_log_add("[consciousness_up]".ljust(20) + str(value))
 
     def burden_get_all(self):
         """
@@ -527,11 +582,15 @@ class Person:
         :return:
         """
         if self.bounty >= value:
+
             if self.level == 1:
                 self.burden_bonus += value
             else:
                 self.burden_add += value
+
             self.bounty -= value
+
+            self.update_log_add("[burden_up]".ljust(20) + str(value))
 
     def skill_get(self, skill_name: str):
         """
@@ -589,11 +648,15 @@ class Person:
         :return:
         """
         if (self.bounty >= value) and (self.skills.get(skill_name)):
+
             if self.level == 1:
                 self.skills[skill_name]["bonus"] += value
             else:
                 self.skills[skill_name]["add"] += value
+
             self.bounty -= value
+
+            self.update_log_add("[skill_up] [" + skill_name + "]".ljust(20) + str(value))
 
     def equipment_add(self, name: str, count: int, weight: float):
         """
@@ -670,61 +733,61 @@ class Person:
         :return: -
         """
         if name == "strength":
-            self.strength_up()
+            self.strength_up(value)
         elif name == "agility":
-            self.agility_up()
+            self.agility_up(value)
         elif name == "intellect":
-            self.intellect_up()
+            self.intellect_up(value)
         elif name == "initiative":
-            self.initiative_up()
+            self.initiative_up(value)
         elif name == "health":
-            self.health_up()
+            self.health_up(value)
         elif name == "energy":
-            self.energy_up()
+            self.energy_up(value)
         elif name == "persistence":
-            self.persistence_up()
+            self.persistence_up(value)
         elif name == "reaction":
-            self.reaction_up()
+            self.reaction_up(value)
         elif name == "consciousness":
-            self.consciousness_up()
+            self.consciousness_up(value)
         elif name == "burden":
-            self.burden_up()
+            self.burden_up(value)
         elif name == "athletics":
-            self.skill_up("athletics")
+            self.skill_up("athletics", value)
         elif name == "no_weapons":
-            self.skill_up("no_weapons")
+            self.skill_up("no_weapons", value)
         elif name == "endurance":
-            self.skill_up("endurance")
+            self.skill_up("endurance", value)
         elif name == "throwing":
-            self.skill_up("throwing")
+            self.skill_up("throwing", value)
         elif name == "heavy_weapon":
-            self.skill_up("heavy_weapon")
+            self.skill_up("heavy_weapon", value)
         elif name == "cold_weapon":
-            self.skill_up("cold_weapon")
+            self.skill_up("cold_weapon", value)
         elif name == "gambl":
-            self.skill_up("gambl")
+            self.skill_up("gambl", value)
         elif name == "acrobatics":
-            self.skill_up("acrobatics")
+            self.skill_up("acrobatics", value)
         elif name == "theft":
-            self.skill_up("theft")
+            self.skill_up("theft", value)
         elif name == "light_weapon":
-            self.skill_up("light_weapon")
+            self.skill_up("light_weapon", value)
         elif name == "traps":
-            self.skill_up("traps")
+            self.skill_up("traps", value)
         elif name == "observation":
-            self.skill_up("observation")
+            self.skill_up("observation", value)
         elif name == "hack":
-            self.skill_up("hack")
+            self.skill_up("hack", value)
         elif name == "hightech_weapons":
-            self.skill_up("hightech_weapons")
+            self.skill_up("hightech_weapons", value)
         elif name == "engineering":
-            self.skill_up("engineering")
+            self.skill_up("engineering", value)
         elif name == "medicine":
-            self.skill_up("medicine")
+            self.skill_up("medicine", value)
         elif name == "negotiation":
-            self.skill_up("negotiation")
+            self.skill_up("negotiation", value)
         elif name == "trade":
-            self.skill_up("trade")
+            self.skill_up("trade", value)
 
     def __init__(self, name: str = "NoName", level: int = 1):
         """
@@ -809,12 +872,12 @@ class Person:
 
 # Tests
 
-test_pers = Person(level=2)
-print(test_pers)
-test_pers.strength_up()
-print(test_pers)
-test_pers.energy_change(-3)
-test_pers.health_change(-5)
-print(test_pers)
-test_pers.strength_up()
-print(test_pers)
+# test_pers = Person(level=2)
+# print(test_pers)
+# test_pers.strength_up()
+# print(test_pers)
+# test_pers.energy_change(-3)
+# test_pers.health_change(-5)
+# print(test_pers)
+# test_pers.strength_up()
+# print(test_pers)
