@@ -384,14 +384,18 @@ class Person:
         """
         if self.bounty >= value:
 
+            health_diff_current = self.health_get_all() - self.health_get_current()
+
             if self.level == 1:
                 self.health_bonus += value
             else:
                 self.health_add += value
 
             self.bounty -= value
+            self.health_current = self.health_get_all() - health_diff_current
 
             self.update_log_add("[health_up]".ljust(20) + str(value))
+
 
     def health_change(self, value: int):
         """
@@ -435,12 +439,14 @@ class Person:
         :return: -
         """
         if self.bounty >= value:
+            energy_diff_current = self.energy_get_all() - self.energy_get_current()
+
             if self.level == 1:
                 self.energy_bonus += value
             else:
                 self.energy_add += value
             self.bounty -= value
-
+            self.energy_current = self.energy_get_all() - energy_diff_current
             self.update_log_add("[energy_up]".ljust(20) + str(value))
 
     def energy_change(self, value: int):
