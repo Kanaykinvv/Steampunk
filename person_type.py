@@ -1,5 +1,5 @@
 import random
-from Person import Person
+from person import Person
 # Указаны типы персонажей и их возможные параметры
 
 type_person = {
