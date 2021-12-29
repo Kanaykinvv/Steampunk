@@ -1,6 +1,8 @@
 import datetime
 
+import items
 from game_config import *
+from items import *
 
 class Person:
 
@@ -578,7 +580,7 @@ class Person:
         """
         result = 0.0
         for key in self.equipment:
-            result += self.equipment[key][0] * self.equipment[key][1]
+            result += self.equipment[key] * items.ITEMS[key]["weight"]
         self.burden_current = result
         return self.burden_current
 
@@ -664,20 +666,20 @@ class Person:
 
             self.update_log_add("[skill_up] [" + skill_name + "]".ljust(20) + str(value))
 
-    def equipment_add(self, name: str, count: int, weight: float):
+    def equipment_add(self, name: str, count: int):
         """
         Добавление предмета в инвентарь, если есть свободный вес (ноша)
         :param name: Наименование предмета
         :param count: Количество предметов
-        :param weight: Вес предмета (одного)
         :return: -
         """
-        if self.burden_current >= weight:
-            if name in self.equipment:
-                self.equipment[name][0] += count
-            else: self.equipment[name] = [count, weight]
+        if name in items.ITEMS.keys():
+            if self.burden_current >= items.ITEMS["name"]["weight"]:
+                if name in self.equipment:
+                    self.equipment[name] += count
+                else: self.equipment[name] = count
 
-            self.burden_get_current()
+                self.burden_get_current()
 
     def equipment_del(self, name: str):
         """
@@ -696,9 +698,9 @@ class Person:
         :param count: Количество использованных предметов
         :return: -
         """
-        if (name in self.equipment) and (self.equipment[name][0] >= count):
-            self.equipment[name][0] -= count
-            if self.equipment[name][0] == 0:
+        if (name in self.equipment) and (self.equipment[name] >= count):
+            self.equipment[name] -= count
+            if self.equipment[name] == 0:
                 self.equipment_del(name)
             self.burden_get_current()
 
@@ -869,8 +871,10 @@ class Person:
                  "Навык - Медицина ".ljust(48, "·") + " " + str(self.skill_get("medicine")) + "\n" + \
                  "Навык - Переговоры ".ljust(48, "·") + " " + str(self.skill_get("negotiation")) + "\n" + \
                  "Навык - Торговля ".ljust(48, "·") + " " + str(self.skill_get("trade")) + "\n" + \
+                 "-" * 50 + "\n" + \
+                 "ЭКИПИРОВКА".center(50, " ") + "\n" + \
                  "-" * 50 + "\n"
-
+        print(self.equipment)
         return result
 
     # Проблемы:
@@ -878,12 +882,8 @@ class Person:
 
 # Tests
 
-# test_pers = Person(level=2)
-# print(test_pers)
-# test_pers.strength_up()
-# print(test_pers)
-# test_pers.energy_change(-3)
-# test_pers.health_change(-5)
-# print(test_pers)
-# test_pers.strength_up()
-# print(test_pers)
+test_pers = Person(level=2)
+test_pers.equipment_add(name="name", count=1)
+print(test_pers)
+
+
