@@ -874,8 +874,12 @@ class Person:
                  "-" * 50 + "\n" + \
                  "ЭКИПИРОВКА".center(50, " ") + "\n" + \
                  "-" * 50 + "\n"
-        print(self.equipment)
-        return result
+
+        equipment = ""
+        for item in self.equipment:
+            equipment += item.ljust(48, "·") + " " + str(self.equipment[item]) + "\n"
+
+        return result + equipment
 
     # Проблемы:
     # - Перерсчет всех показателей при добавлении/исключении Эффектов
