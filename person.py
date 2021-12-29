@@ -674,12 +674,16 @@ class Person:
         :return: -
         """
         if name in items.ITEMS.keys():
-            if self.burden_current >= items.ITEMS["name"]["weight"]:
+            if (self.burden_get_all() - self.burden_current) >= items.ITEMS["name"]["weight"]:
                 if name in self.equipment:
                     self.equipment[name] += count
                 else: self.equipment[name] = count
 
                 self.burden_get_current()
+            else:
+                print("Нет столько свободного веса!")
+        else:
+            print("Нет такого предмета!")
 
     def equipment_del(self, name: str):
         """

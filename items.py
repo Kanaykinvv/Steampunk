@@ -1,7 +1,7 @@
 
 ITEMS = {
     "name": {
-        "weight"                    : 0,
+        "weight"                    : 10,
         "description"               : 0,
         "initiative_effect"         : 0,
         "health_effect"             : 0,
