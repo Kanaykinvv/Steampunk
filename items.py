@@ -30,7 +30,7 @@ ITEMS_GROUP = {
 ITEMS = {
     "name": {
         "chance":                      0,    # Шанс появления
-        "weight":                      10.0,  # Вес
+        "weight":                      3.0,  # Вес
         "description":                 0,    # Описание
         "initiative_effect":           0,    # Инициатива (эффект)
         "health_effect":               0,    # Здоровье (эффект)

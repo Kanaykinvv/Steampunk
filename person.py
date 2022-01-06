@@ -932,7 +932,7 @@ def create_items(person: Person, burden_max: int = 20):
     print("Текущий процент загруженности: " + str(tmp_burden) + " | текущий вес: " + str(person.burden_get_current()))
 
     while tmp_burden <= burden_max:
-        if int(( ( items.ITEMS["name"]["weight"] + person.burden_get_current()) / person.burden_get_all()) * 100) < burden_max:
+        if int(( ( items.ITEMS["name"]["weight"] + person.burden_get_current()) / person.burden_get_all()) * 100) <= burden_max:
             person.equipment_add("name", 1)
             tmp_burden = int((person.burden_get_current() / person.burden_get_all()) * 100)
             print("Текущий процент загруженности: " + str(tmp_burden) + " | текущий вес: " + str(person.burden_get_current()))
@@ -978,7 +978,7 @@ def create_person(type: str, level: int = 1):
 
 # Tests
 my_test_person = create_person(type="warrior", level=15)
-create_items(my_test_person, 50)
+create_items(my_test_person)
 print(my_test_person)
 my_test_person.update_log_print()
 
