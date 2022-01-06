@@ -665,7 +665,7 @@ class Person:
 
             self.update_log_add("[skill_up] [" + skill_name + "]".ljust(20) + str(value))
 
-    def equipment_add(self, name: str, count: int):
+    def equipment_add(self, name: str, count: int = 1):
         """
         Добавление предмета в инвентарь, если есть свободный вес (ноша)
         :param name: Наименование предмета
@@ -921,6 +921,23 @@ types = {
     }
 }
 
+def create_items(person: Person, burden_max: int = 20):
+    # Количество денег
+    a = random.randint(0, person.level)
+    b = random.randint(0, burden_max)
+    generate_cash = int(a * b * (random.randint(1, 11) / 10))
+    person.cash_change(generate_cash)
+
+    tmp_burden = int((person.burden_get_current() / person.burden_get_all()) * 100)
+    print("Текущий процент загруженности: " + str(tmp_burden) + " | текущий вес: " + str(person.burden_get_current()))
+
+    while tmp_burden <= burden_max:
+        if int(( ( items.ITEMS["name"]["weight"] + person.burden_get_current()) / person.burden_get_all()) * 100) < burden_max:
+            person.equipment_add("name", 1)
+            tmp_burden = int((person.burden_get_current() / person.burden_get_all()) * 100)
+            print("Текущий процент загруженности: " + str(tmp_burden) + " | текущий вес: " + str(person.burden_get_current()))
+        else:
+            break
 
 def create_person(type: str, level: int = 1):
 
@@ -931,7 +948,7 @@ def create_person(type: str, level: int = 1):
                                                       key=lambda item: item[1],
                                                       reverse=True)}
         # Указано для теста проверки сортировки
-        print(parameter_priority)
+        #print(parameter_priority)
 
         max_random = 0
         for value in types[type].values():
@@ -958,8 +975,10 @@ def create_person(type: str, level: int = 1):
 
 
 
+
 # Tests
-my_test_person = create_person(type="warrior", level=4)
+my_test_person = create_person(type="warrior", level=15)
+create_items(my_test_person, 50)
 print(my_test_person)
 my_test_person.update_log_print()
 
