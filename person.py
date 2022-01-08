@@ -922,12 +922,14 @@ types = {
 }
 
 def create_items(person: Person, burden_max: int = 20):
+    #=======================
     # Количество денег
     a = random.randint(0, person.level)
     b = random.randint(0, burden_max)
     generate_cash = int(a * b * (random.randint(1, 11) / 10))
     person.cash_change(generate_cash)
-
+    # =======================
+    # Добавление предмета до указанного уровня загружености (в процентах, burden_max)
     tmp_burden = int((person.burden_get_current() / person.burden_get_all()) * 100)
     print("Текущий процент загруженности: " + str(tmp_burden) + " | текущий вес: " + str(person.burden_get_current()))
 
