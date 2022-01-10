@@ -44,4 +44,6 @@ class Person(models.Model):
     burden_bonus = models.IntegerField(default=0, verbose_name='Ноша (бонус)')
     burden_add = models.IntegerField(default=0, verbose_name='Ноша (улучшение)')
 
-
+    class Meta:
+        verbose_name = 'Персонаж'
+        verbose_name_plural = 'Персонажи'
