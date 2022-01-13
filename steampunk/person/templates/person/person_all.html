@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Все персонажи</title>
+</head>
+<body>
+    <h1>Персонажи</h1>
+    {% for person in persons %}
+    <div>
+        <h2>{{ person.name }}</h2>
+        <p>Уровень = {{ person.level }}</p>
+    </div>
+    {% endfor %}
+</body>
+</html>
