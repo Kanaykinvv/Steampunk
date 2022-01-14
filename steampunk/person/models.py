@@ -44,7 +44,20 @@ class Person(models.Model):
     burden_bonus = models.IntegerField(default=0, verbose_name='Ноша (бонус)')
     burden_add = models.IntegerField(default=0, verbose_name='Ноша (улучшение)')
 
+    item = models.ForeignKey('Item', null=True, on_delete=models.PROTECT, verbose_name='Предмет')
+
     class Meta:
         verbose_name = 'Персонаж'
         verbose_name_plural = 'Персонажи'
 
+class Item(models.Model):
+    name = models.CharField(max_length=30, db_index=True, verbose_name='Наименование предмета')
+    description = models.TextField(verbose_name='Описание предмета')
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Предмет'
+        verbose_name_plural = 'Предметы'
+        ordering = ['name']
